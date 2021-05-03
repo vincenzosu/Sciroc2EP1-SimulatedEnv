@@ -12,8 +12,8 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-sciroc_ep1_object_manager.srv import ResetTray
-sciroc_ep1_object_manager.srv import MoveObjectsOnClosesTable
+from sciroc_ep1_object_manager.srv import ResetTray
+from sciroc_ep1_object_manager.srv import MoveObjectsOnClosesTable
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
