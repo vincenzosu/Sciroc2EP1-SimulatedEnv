@@ -64,34 +64,7 @@ class sciroc_ep1_object_manager:
         self.launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_file])
         self.launch.start()
 
-        
-
-    def are_ranges_complete(self, ranges):
-        for single_range in ranges:
-            if single_range == None:
-                return False
-        return True
-        
-    def null_the_ranges(self, ranges):
-        for single_range in ranges:
-            single_range = None
-        
-    def sensor_identifier(self, ros_data):
-        return int(ros_data.header.frame_id[-1])%4
-
-    def publish_strips(self, tmp_ranges, ros_data, ranges_pub):
-        sensorID = self.sensor_identifier(ros_data)
-        tmp_ranges[sensorID] = ros_data
-        if (self.are_ranges_complete(tmp_ranges)):
-            msg = Passage()
-            #msg.STATUS_OK = 1
-            msg.ranges[0] = tmp_ranges[0]
-            msg.ranges[1] = tmp_ranges[1]
-            msg.ranges[2] = tmp_ranges[2]
-            msg.ranges[3] = tmp_ranges[3]
-            ranges_pub.publish(msg)
-            self.null_the_ranges(tmp_ranges)
-
+ 
     def cw_left_callback(self, ros_data):
         self.publish_strips(self.cw_left, ros_data, self.cw_left_pub)
 
@@ -119,11 +92,8 @@ def talker(ebws):
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
-        retrieveBenchmarkConfiguration(ebws)
-        #if benchmarkConfigurationHasChanged(ebws):
-        #    if ebws.current_door_opening_side is not None: 
-        #        restartSim(ebws)
 
+        
         r.sleep()
 
 
@@ -180,7 +150,7 @@ def get_robot_position():
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
         print("robot pose " + str(resp_coordinates.pose.position.x))
-    return resp_coordinates.pose.position.x, resp_coordinates.pose.position.y
+    return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
 
 
 def get_closest_table_position():
@@ -192,8 +162,10 @@ def get_closest_table_position():
             resp_coordinates = model_coordinates(table, '')
             curr_table_coords = np.array(resp_coordinates.pose.position.x,
                 resp_coordinates.pose.position.y)
-            if (get_robot_position() - curr_table_coords).norm()  < min_distance:
+            curr_min_dist = get_robot_position() - curr_table_coords).norm()
+            if curr_min_dist  < min_distance:
                 closest_table_position = curr_table_coords
+                min_distance = curr_min_dist
         except rospy.ServiceException, e:
             print "ServiceProxy failed: %s"%e
             #exit(0)
@@ -203,23 +175,6 @@ def get_closest_table_position():
 
 
 
-def get_closest_table_position_old():
-    try:
-        get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    model_prop = get_model_properties("door_simple")
-    try:
-        get_door_joint_props = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    if VERBOSE: print('---------- door aperture ---------')
-    joint_prop = get_door_joint_props('joint_frame_door')
-    if VERBOSE: print(joint_prop.position[0])
-   
-    return joint_prop.position[0]
 
 def listener(self):
 #    rospy.init_node('eurobench_worldstate_provider', anonymous=True)
