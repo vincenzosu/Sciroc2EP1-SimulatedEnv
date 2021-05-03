@@ -40,9 +40,9 @@ list_of_tables = {
 
 class sciroc_ep1_object_manager:
     def __init__(self):
-
-        self.cw_left = np.array([None, None, None, None])
-						   self.ccw_right_callback, queue_size=1)          							
+        print("init")
+        #self.cw_left = np.array([None, None, None, None])
+		#				   self.ccw_right_callback, queue_size=1)          							
 
           
     def startSim(self):
