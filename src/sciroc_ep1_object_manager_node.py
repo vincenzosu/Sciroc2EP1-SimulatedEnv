@@ -35,9 +35,9 @@ class sciroc_ep1_object_manager:
         print("init")
         #self.cw_left = np.array([None, None, None, None])
 		#				   self.ccw_right_callback, queue_size=1)   
-		self.robot_pose = [0.0,0.0]		
+        self.robot_pose = [0.0,0.0]		
 		
-		self.list_of_tables = {
+        self.list_of_tables = {
             "cafe_table", 
             "cafe_table_0", 
             "cafe_table_1", 
