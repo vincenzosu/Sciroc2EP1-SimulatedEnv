@@ -125,17 +125,14 @@ def callback(data):
     rospy.loginfo("%s is age: %d" % (data.name, data.age))
     print ("initialized")
 
-def handle_beast_trolley_dummy_srv(req):  #TODO CHECK VINCENZO
-    print("Handled dummy service")
-    return SetStiffness.srvResponse(True, "")
 
 def reset_tray_srv(req):  
     print("reset_tray_srv service")
-    return SetStiffness.srvResponse(True, "")
+    return ResetTray.srvResponse(True, "")
 
 def move_objects_on_the_closest_table_srv(req):  
     print("move_objects_on_the_closest_table_srv service")
-    return SetStiffness.srvResponse(True, "")
+    return MoveObjectsOnClosesTable.srvResponse(True, "")
     
     
 def is_there_an_object_on(x,y,z):
@@ -317,8 +314,8 @@ def main(args):
      listener(ebws)
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
-     s = rospy.Service('/sciroc_object_manager/reset_tray', SetStiffness, reset_tray_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', SetStiffness, move_objects_on_the_closest_table_srv) 
+     s = rospy.Service('/sciroc_object_manager/reset_tray', ResetTray, reset_tray_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosesTable, move_objects_on_the_closest_table_srv) 
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
      try:
