@@ -285,33 +285,6 @@ def getTrolleyPosition():
     #return joint_prop_handle.position[0]
 
 
-def retrieveBenchmarkConfiguration(ebws):    # Based on the currently selected benchmark type
-    try:
-        get_benchmark_params = rospy.ServiceProxy('beast/gui/benchmark_params', BeastBenchmarkParams)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    response = get_benchmark_params()
-    ebws.stiffness = response.stiffness
-    if VERBOSE:
-        print "\n---- trolley stiffness from gui:"
-        print ebws.stiffness
-
-
-def benchmarkConfigurationHasChanged(ebws):
-    if (ebws.current_door_opening_side != ebws.old_door_opening_side
-    or ebws.current_robot_approach_side != ebws.old_robot_approach_side):
-        # to restart also when simulation force change use 
-        # ebws.current_benchmark_name != ebws.old_benchmark_name
-        ebws.old_benchmark_name = ebws.current_benchmark_name
-        ebws.old_door_opening_side = ebws.current_door_opening_side
-        ebws.old_robot_approach_side = ebws.current_robot_approach_side
-        if VERBOSE: 
-            print("PARAMETERS ARE CHANGED")
-            
-        return True;
-    return False;
-        
 
 #def getScene(benchmark_name):
 #    scene_map = {
