@@ -12,7 +12,7 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-from beast_simulation_state_collector.srv import BeastCartDummy
+#from beast_simulation_state_collector.srv import BeastCartDummy
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
