@@ -18,8 +18,8 @@ from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
-from beast_srvs.srv import *
-from eurobench_bms_msgs_and_srvs.srv import *
+#from beast_srvs.srv import *
+#from eurobench_bms_msgs_and_srvs.srv import *
 
 
 
