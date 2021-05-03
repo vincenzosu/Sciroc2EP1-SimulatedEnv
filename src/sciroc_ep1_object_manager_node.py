@@ -28,26 +28,27 @@ from gazebo_msgs.srv import GetJointProperties
 
 VERBOSE = True
 
-list_of_tables = {
-    "cafe_table", 
-    "cafe_table_0", 
-    "cafe_table_1", 
-    "cafe_table_2", 
-    "cafe_table_3", 
-    "cafe_table_4", 
-    "cafe_table_5",
-    "cafe_table_"
-}
-
-bank_object = {"table"}
-
 
 
 class sciroc_ep1_object_manager:
     def __init__(self):
         print("init")
         #self.cw_left = np.array([None, None, None, None])
-		#				   self.ccw_right_callback, queue_size=1)          							
+		#				   self.ccw_right_callback, queue_size=1)   
+		self.robot_pose = [0.0,0.0]		
+		
+		self.list_of_tables = {
+            "cafe_table", 
+            "cafe_table_0", 
+            "cafe_table_1", 
+            "cafe_table_2", 
+            "cafe_table_3", 
+            "cafe_table_4", 
+            "cafe_table_5",
+            "cafe_table_"
+        }
+
+        self.bank_object = {"table"}				
 
           
     def startSim(self):
@@ -170,36 +171,39 @@ def set_item(goal_x, goal_y,goal_z, object_to_move):
        print "Service call failed: %s" % e
 
 def get_robot_position():
-    model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
-    resp_coordinates = model_coordinates('tiago', '')
-    print('---------- get_robot_position ---------')
-    print '\n'
-    print 'Status.success = ', resp_coordinates.success
-    
-    print("pose  X : " + str(resp_coordinates.pose.position.x))
-    print("Quaternion X : " + str(resp_coordinates.pose.orientation.x))
-    
-
     try:
-        get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
+        model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
+        resp_coordinates = model_coordinates('tiago', '')
     except rospy.ServiceException, e:
         print "ServiceProxy failed: %s"%e
         exit(0)
-    model_prop = get_model_properties("tiago")
-    try:
-        get_door_joint_props = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    if VERBOSE: print('---------- get_robot_position ---------')
-    joint_prop = get_door_joint_props('tiago')
-    if VERBOSE: print(joint_prop.position[0])
-    #https://answers.ros.org/question/261782/how-to-use-getmodelstate-service-from-gazebo-in-python/
-   
-    return joint_prop.position[0]
+    if VERBOSE:
+        print 'Status.success = ', resp_coordinates.success
+        print("robot pose " + str(resp_coordinates.pose.position.x))
+    return resp_coordinates.pose.position.x, resp_coordinates.pose.position.y
 
 
 def get_closest_table_position():
+    min_distance = 1000000
+    closest_table_position = np.array(0,0)
+    for table in self.list_of_tables:
+        try:
+            model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
+            resp_coordinates = model_coordinates(table, '')
+            curr_table_coords = np.array(resp_coordinates.pose.position.x,
+                resp_coordinates.pose.position.y)
+            if (get_robot_position() - curr_table_coords).norm()  < min_distance:
+                closest_table_position = curr_table_coords
+        except rospy.ServiceException, e:
+            print "ServiceProxy failed: %s"%e
+            #exit(0)
+    
+    return closest_table_position
+
+
+
+
+def get_closest_table_position_old():
     try:
         get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
     except rospy.ServiceException, e:
