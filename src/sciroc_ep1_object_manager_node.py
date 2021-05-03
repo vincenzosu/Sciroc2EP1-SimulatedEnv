@@ -178,7 +178,7 @@ def get_robot_position():
         print "ServiceProxy failed: %s"%e
         exit(0)
     if VERBOSE: print('---------- get_robot_position ---------')
-    joint_prop = get_door_joint_props('joint_frame_door')
+    joint_prop = get_door_joint_props('tiago')
     if VERBOSE: print(joint_prop.position[0])
    
     return joint_prop.position[0]
