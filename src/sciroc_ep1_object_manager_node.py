@@ -27,6 +27,7 @@ from gazebo_msgs.srv import GetJointProperties
 
 
 VERBOSE = True
+
 list_of_tables = {
     "cafe_table", 
     "cafe_table_0", 
@@ -34,8 +35,11 @@ list_of_tables = {
     "cafe_table_2", 
     "cafe_table_3", 
     "cafe_table_4", 
-    "cafe_table_5" 
+    "cafe_table_5",
+    "cafe_table_"
 }
+
+bank_object = {"table"}
 
 
 
@@ -166,6 +170,17 @@ def set_item(goal_x, goal_y,goal_z, object_to_move):
        print "Service call failed: %s" % e
 
 def get_robot_position():
+    model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
+    resp_coordinates = model_coordinates('tiago', '')
+    print('---------- get_robot_position ---------')
+    print '\n'
+    print 'Status.success = ', resp_coordinates.success
+    print(blockName)
+    print("Cube " + str(block._name))
+    print("pose  X : " + str(resp_coordinates.pose.position.x))
+    print("Quaternion X : " + str(resp_coordinates.pose.orientation.x))
+    
+
     try:
         get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
     except rospy.ServiceException, e:
@@ -180,6 +195,7 @@ def get_robot_position():
     if VERBOSE: print('---------- get_robot_position ---------')
     joint_prop = get_door_joint_props('tiago')
     if VERBOSE: print(joint_prop.position[0])
+    #https://answers.ros.org/question/261782/how-to-use-getmodelstate-service-from-gazebo-in-python/
    
     return joint_prop.position[0]
 
