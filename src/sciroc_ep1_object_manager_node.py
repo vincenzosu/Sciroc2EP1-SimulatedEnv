@@ -175,8 +175,7 @@ def get_robot_position():
     print('---------- get_robot_position ---------')
     print '\n'
     print 'Status.success = ', resp_coordinates.success
-    print(blockName)
-    print("Cube " + str(block._name))
+    
     print("pose  X : " + str(resp_coordinates.pose.position.x))
     print("Quaternion X : " + str(resp_coordinates.pose.orientation.x))
     
