@@ -17,7 +17,9 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   ResetTray.srv
-  MoveObjectsOnClosesTable.srv
+  MoveObjectsOnClosestTable.srv
+  GetThreeObjects.srv
+  ChangeTheObject.srv
 )
 
 ## Generate actions in the 'action' folder
