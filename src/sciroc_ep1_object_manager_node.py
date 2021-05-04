@@ -23,6 +23,10 @@ from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
 
 
+from geometry_msgs.msg import Pose, Point, Quaternion
+from gazebo_msgs.srv import SpawnModel, DeleteModel
+
+
 
 VERBOSE = True
 
