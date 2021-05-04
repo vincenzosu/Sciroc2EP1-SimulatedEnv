@@ -26,6 +26,8 @@ from gazebo_msgs.srv import GetJointProperties
 from geometry_msgs.msg import Pose, Point, Quaternion
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 
+object_counter = 0
+
 
 
 VERBOSE = True
@@ -162,9 +164,10 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
     blocks_table_path = ep1_models_path + "/" + blocks_table_name+ "/model.sdf"
     blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=1.0))
 
-    spawn_sdf_model(blocks_table_name, blocks_table_path, blocks_table_pose, world_reference_frame)
-    model_list.append(blocks_table_name)
+    spawn_sdf_model(blocks_table_name+str(object_counter), blocks_table_path, blocks_table_pose, world_reference_frame)
+    model_list.append(blocks_table_name+str(object_counter))
 
+    object_counter++
     # Spawn Trays Table
     #trays_table_name = "trays_table"
     #trays_table_path = sorting_demo_models_path + "table/model.sdf"
