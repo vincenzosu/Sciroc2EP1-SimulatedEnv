@@ -13,7 +13,7 @@ from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
 from sciroc_ep1_object_manager.srv import ResetTray
-from sciroc_ep1_object_manager.srv import MoveObjectsOnClosesTable
+from sciroc_ep1_object_manager.srv import MoveObjectsOnClosestTable
 from sciroc_ep1_object_manager.srv import GetThreeObjects
 from sciroc_ep1_object_manager.srv import ChangeTheObject
 from gazebo_msgs.srv import GetModelState
@@ -114,7 +114,7 @@ def move_objects_on_the_closest_table_srv(req):
     #TODO
     
     print("move_objects_on_the_closest_table_srv service")
-    return MoveObjectsOnClosesTable.srvResponse(True, "")
+    return MoveObjectsOnClosestTable.srvResponse(True, "")
     
 def get_three_objects_srv(req):  
     #TODO
