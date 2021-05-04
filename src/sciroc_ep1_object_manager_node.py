@@ -14,13 +14,13 @@ from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
 from sciroc_ep1_object_manager.srv import ResetTray
 from sciroc_ep1_object_manager.srv import MoveObjectsOnClosesTable
+from sciroc_ep1_object_manager.srv import GetThreeObjects
+from sciroc_ep1_object_manager.srv import ChangeTheObject
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
-#from beast_srvs.srv import *
-#from eurobench_bms_msgs_and_srvs.srv import *
 
 
 
@@ -90,8 +90,9 @@ def talker(ebws):
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
-        get_robot_position()
+#        get_robot_position()
 
+        load_gazebo_models()
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
@@ -127,6 +128,48 @@ def change_the_objects_srv(req):
     print("change_the_objects_srv service")
     return ChangeTheObject.srvResponse(True, "")
     
+  
+def spawn_sdf(name, description_xml, pose, reference_frame):
+    rospy.wait_for_service('/gazebo/spawn_sdf_model')
+    try:
+        spawn_sdf = rospy.ServiceProxy('/gazebo/spawn_sdf_model', SpawnModel)
+        resp_sdf = spawn_sdf(name, description_xml, "/", pose, reference_frame)
+    except rospy.ServiceException as e:
+        rospy.logerr("Spawn SDF service call failed: {0}".format(e)) 
+  
+def spawn_sdf_model(name, path, pose, reference_frame):
+    # Load Model SDF
+    description_xml = ''
+    with open(path, "r") as model_file:
+        description_xml = model_file.read().replace('\n', '')
+        spawn_sdf(name, description_xml, pose,reference_frame)
+        
+def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
+    model_list = []
+
+    world_reference_frame = "world"
+
+    # sorting_demo model path  #TODO change sorting_demo with name of the package
+    ep1_models_path = rospkg.RosPack().get_path('Sciroc2EP1-SimulatedEnv') + "/models/" #forse chiamare cosi sciroc_ep1_object_manager
+
+    # Spawn object
+    blocks_table_name = obj_name
+    blocks_table_path = ep1_models_path + "/" + blocks_table_name+ "/model.sdf"
+    blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=0.0))
+
+    spawn_sdf_model(blocks_table_name, blocks_table_path, blocks_table_pose, world_reference_frame)
+    model_list.append(blocks_table_name)
+
+    # Spawn Trays Table
+    #trays_table_name = "trays_table"
+    #trays_table_path = sorting_demo_models_path + "table/model.sdf"
+    #trays_table_pose = Pose(position=Point(x=0.0, y=0.95, z=0.0))
+
+    #spawn_sdf_model(trays_table_name, trays_table_path, trays_table_pose, world_reference_frame)
+    #model_list.append(trays_table_name)
+
+
+    return model_list
     
 def is_there_an_object_on(x,y,z):
     return False
