@@ -150,7 +150,7 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
     world_reference_frame = "world"
 
     # sorting_demo model path  #TODO change sorting_demo with name of the package
-    ep1_models_path = rospkg.RosPack().get_path('Sciroc2EP1-SimulatedEnv') + "/models/" #forse chiamare cosi sciroc_ep1_object_manager
+    ep1_models_path = rospkg.RosPack().get_path('sciroc_ep1_object_manager') + "/models/" #forse chiamare cosi sciroc_ep1_object_manager
 
     # Spawn object
     blocks_table_name = obj_name
