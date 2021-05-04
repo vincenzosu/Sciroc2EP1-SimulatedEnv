@@ -167,7 +167,7 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
     spawn_sdf_model(blocks_table_name+str(object_counter), blocks_table_path, blocks_table_pose, world_reference_frame)
     model_list.append(blocks_table_name+str(object_counter))
 
-    object_counter++
+    object_counter+= 1
     # Spawn Trays Table
     #trays_table_name = "trays_table"
     #trays_table_path = sorting_demo_models_path + "table/model.sdf"
