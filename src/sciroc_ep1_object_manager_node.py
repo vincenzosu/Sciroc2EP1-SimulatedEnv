@@ -24,9 +24,12 @@ from gazebo_msgs.srv import GetJointProperties
 
 
 
-
-
 VERBOSE = True
+
+ROBOT_TRAY_HEIGHT = 0               #TODO
+TABLE_CAFFE_HEIGHT = 0              #TODO
+STARTING_BANK_HEIGHT = 0            #TODO
+MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 
 
 
@@ -107,8 +110,22 @@ def reset_tray_srv(req):
     return ResetTray.srvResponse(True, "")
 
 def move_objects_on_the_closest_table_srv(req):  
+    #TODO
+    
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosesTable.srvResponse(True, "")
+    
+def get_three_objects_srv(req):  
+    #TODO
+    
+    print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
+    return GetThreeObjects.srvResponse(True, "")
+    
+def change_the_objects_srv(req):  
+    #TODO
+    
+    print("change_the_objects_srv service")
+    return ChangeTheObject.srvResponse(True, "")
     
     
 def is_there_an_object_on(x,y,z):
@@ -263,7 +280,12 @@ def main(args):
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
      s = rospy.Service('/sciroc_object_manager/reset_tray', ResetTray, reset_tray_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosesTable, move_objects_on_the_closest_table_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
+     s = rospy.Service('/sciroc_object_manager/get_three_objects', GetThreeObjects, get_three_objects_srv) 
+     s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 
+     
+    
+     
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
      try:
