@@ -97,6 +97,7 @@ def talker(ebws):
 #        get_robot_position()
 
         load_gazebo_models("beer")
+        print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
@@ -159,7 +160,7 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
     # Spawn object
     blocks_table_name = obj_name
     blocks_table_path = ep1_models_path + "/" + blocks_table_name+ "/model.sdf"
-    blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=0.0))
+    blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=1.0))
 
     spawn_sdf_model(blocks_table_name, blocks_table_path, blocks_table_pose, world_reference_frame)
     model_list.append(blocks_table_name)
