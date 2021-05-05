@@ -97,7 +97,7 @@ def talker(ebws):
         
 #        get_robot_position()
 
-        load_gazebo_models("bottle_beer")
+        load_gazebo_models("bottle_red_wine")
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
