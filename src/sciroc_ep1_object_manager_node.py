@@ -32,10 +32,13 @@ object_counter = 0
 VERBOSE = True
 
 ROBOT_TRAY_HEIGHT = 0               #TODO
-TABLE_CAFFE_HEIGHT = 0              #TODO
+TABLE_CAFFE_HEIGHT = 1              #TODO
 STARTING_BANK_HEIGHT = 0            #TODO
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 
+SPAWN_POSE_1 = Pose(position=Point(x=0.75, y=-0.3, z=TABLE_CAFFE_HEIGHT))
+SPAWN_POSE_2 = Pose(position=Point(x=0.75, y=0.0, z=TABLE_CAFFE_HEIGHT))
+SPAWN_POSE_3 = Pose(position=Point(x=0.75, y=0.3, z=TABLE_CAFFE_HEIGHT))
 
 
 class sciroc_ep1_object_manager:
@@ -54,6 +57,12 @@ class sciroc_ep1_object_manager:
             "cafe_table_4", 
             "cafe_table_5",
             "cafe_table_"
+        }
+        
+        self.objects_on_robot_tray = {
+            "none",
+            "none",
+            "none"
         }
 
         self.bank_object = {"table"}				
@@ -118,13 +127,17 @@ def reset_tray_srv(req):
 
 def move_objects_on_the_closest_table_srv(req):  
     #TODO
+    closest_table_position, table_distance = get_closest_table_position_and_distance()
+    if table_distance > MIN_DIST_TO_MOVE_OBJS_ON_TABLE:
+        return MoveObjectsOnClosestTable.srvResponse(False, "")
     
+#    self.objects_on_robot_tray #TODO 
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
     
 def get_three_objects_srv(req):  
     #TODO
-    
+    # string1, string2, string3
     print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
     return GetThreeObjects.srvResponse(True, "")
     
@@ -155,8 +168,8 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
 
     world_reference_frame = "world"
 
-    # sorting_demo model path  #TODO change sorting_demo with name of the package
-    ep1_models_path = rospkg.RosPack().get_path('sciroc_ep1_object_manager') + "/models/" #forse chiamare cosi sciroc_ep1_object_manager
+    # sorting_demo model path  
+    ep1_models_path = rospkg.RosPack().get_path('sciroc_ep1_object_manager') + "/models/" 
 
     # Spawn object
     blocks_table_name = obj_name
@@ -220,7 +233,7 @@ def get_robot_position():
     return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
 
 
-def get_closest_table_position():
+def get_closest_table_position_and_distance():
     min_distance = 1000000
     closest_table_position = np.array(0,0)
     for table in self.list_of_tables:
@@ -237,7 +250,7 @@ def get_closest_table_position():
             print "ServiceProxy failed: %s"%e
             #exit(0)
     
-    return closest_table_position
+    return closest_table_position, min_distance
 
 
 

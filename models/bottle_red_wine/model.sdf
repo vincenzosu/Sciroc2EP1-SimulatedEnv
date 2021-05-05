@@ -35,6 +35,18 @@
           </mesh>
         </geometry>
        </collision>
+       <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
     </link>
     <link name='link_23'>
       <pose frame=''> -0.038814 -0.033806 0.002754 0 -0 0</pose>
@@ -86,6 +98,7 @@
         </geometry>
         
       </collision>
+      
     </link>
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
