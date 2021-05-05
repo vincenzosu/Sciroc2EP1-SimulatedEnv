@@ -90,14 +90,14 @@ def talker(ebws):
     r = rospy.Rate(10) #10hz
 
     msg = Float64()
-    
+    load_gazebo_models("bottle_red_wine")
     while not rospy.is_shutdown():
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
 #        get_robot_position()
 
-        load_gazebo_models("bottle_red_wine")
+        #load_gazebo_models("bottle_red_wine")
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
