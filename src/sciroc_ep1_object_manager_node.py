@@ -276,7 +276,7 @@ def get_robot_orientation():        #OK
     yaw = euler[2]
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
-        print("robot orientation " + yaw)
+        print("robot orientation " + str(yaw))
     return yaw
     
 def get_robot_tray_position():          
