@@ -31,7 +31,7 @@ object_counter = 0
 
 VERBOSE = True
 
-ROBOT_TRAY_HEIGHT = 1.2               #TODO
+ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 STARTING_BANK_HEIGHT = 0            #TODO
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
@@ -107,8 +107,8 @@ def talker(ebws):
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
-#        get_robot_position()
-
+        get_robot_position()
+        get_robot_orientation()
         #load_gazebo_models("bottle_red_wine")
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
@@ -143,7 +143,7 @@ def move_objects_on_the_closest_table_srv(req):
     set_position(closest_table_position.x + OFFSET, 
                 closest_table_position.y - OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                self.objects_on_robot_tray[1)
+                self.objects_on_robot_tray[1])
 
     set_position(closest_table_position.x + OFFSET, 
                 closest_table_position.y + OFFSET,
@@ -160,7 +160,7 @@ def get_three_objects_srv(req):
     
 def change_the_objects_srv(req):  
     #TODO
-    
+    req.name_of_the_object_to_change
     print("change_the_objects_srv service")
     return ChangeTheObject.srvResponse(True, "")
     
