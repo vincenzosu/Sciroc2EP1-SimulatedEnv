@@ -267,10 +267,10 @@ def get_robot_orientation():
         print("robot orintation " )
         print( resp_coordinates.pose)
         quaternion = (
-            pose.orientation.x,
-            pose.orientation.y,
-            pose.orientation.z,
-            pose.orientation.w)
+            resp_coordinates.pose.orientation.x,
+            resp_coordinates.pose.orientation.y,
+            resp_coordinates.pose.orientation.z,
+            resp_coordinates.pose.orientation.w)
         euler = tf.transformations.euler_from_quaternion(quaternion)
         roll = euler[0]
         pitch = euler[1]
