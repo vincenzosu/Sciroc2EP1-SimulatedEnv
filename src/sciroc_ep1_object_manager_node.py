@@ -36,7 +36,7 @@ VERBOSE = True
 ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 STARTING_BANK_HEIGHT = 1.3          #TODO
-TABLE_BANK_POSE = np.array([4.5, -2, STARTING_BANK_HEIGHT])
+TABLE_BANK_POSE = np.array([4.5, -1.7, STARTING_BANK_HEIGHT])
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
