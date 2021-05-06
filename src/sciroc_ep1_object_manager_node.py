@@ -252,7 +252,7 @@ def get_robot_position():
         print 'Status.success = ', resp_coordinates.success
         print("robot pose " + str(resp_coordinates.pose.position.x))
         print("robot pose " + str(resp_coordinates.pose.position.y))
-    return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
+    return np.array([resp_coordinates.pose.position.x, resp_coordinates.pose.position.y])
     
 def get_robot_orientation():
     try:
