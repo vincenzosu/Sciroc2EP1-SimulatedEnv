@@ -165,6 +165,9 @@ def get_three_objects_srv(req):
     print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
     return GetThreeObjects.srvResponse(True, "")
     
+def spawn_three_obj():
+        
+    
 def change_the_objects_srv(req):  
     #TODO
     req.name_of_the_object_to_change
@@ -195,7 +198,7 @@ def load_and_spawn_gazebo_models(obj_name, x_obj, y_obj, z_obj):
     # Spawn object
     object_name = obj_name
     object_path = ep1_models_path + "/" + object_name+ "/model.sdf"
-    object_pose = Pose(position=Point(x=x_obj, y=y_obj, z=y_obj))
+    object_pose = Pose(position=Point(x=x_obj, y=y_obj, z=z_obj))
     global object_counter 
     spawn_sdf_model(object_name+str(object_counter), 
         object_path, 
