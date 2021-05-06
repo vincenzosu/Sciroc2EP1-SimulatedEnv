@@ -31,12 +31,13 @@ object_counter = 0
 
 VERBOSE = True
 
-ROBOT_TRAY_HEIGHT = 0               #TODO
+ROBOT_TRAY_HEIGHT = 1.2               #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 STARTING_BANK_HEIGHT = 0            #TODO
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
-OFFSET = 0.15
+OFFSET = 0.2
+OFFSET_TRAY = 0.1
 
 SPAWN_POSE_1 = Pose(position=Point(x=0.75, y=-0.3, z=TABLE_CAFFE_HEIGHT))
 SPAWN_POSE_2 = Pose(position=Point(x=0.75, y=0.0, z=TABLE_CAFFE_HEIGHT))
@@ -193,7 +194,10 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
     blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=1.6))
 
     global object_counter 
-    spawn_sdf_model(blocks_table_name+str(object_counter), blocks_table_path, blocks_table_pose, world_reference_frame)
+    spawn_sdf_model(blocks_table_name+str(object_counter), 
+        blocks_table_path, 
+        blocks_table_pose, 
+        world_reference_frame)
     model_list.append(blocks_table_name+str(object_counter))
 
     object_counter+= 1
@@ -249,10 +253,7 @@ def get_robot_position():
         print("robot pose " + str(resp_coordinates.pose.position.x))
     return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
     
-def get_robot_tray_position():
-    robot_pose = get_robot_position()
-    
-    
+def get_robot_orientation():
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -261,9 +262,19 @@ def get_robot_tray_position():
         exit(0)
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
-        print("robot pose " + str(resp_coordinates.pose.position.x))
-    return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
-
+        print("robot orintation " + str(resp_coordinates.pose.orientation.yaw))
+    return resp_coordinates.pose.orientation.yaw
+    
+def get_robot_tray_position():
+    robot_pose = get_robot_position()
+    robot_orientation = get_robot_orientation()
+    
+    return np.array(
+        robot_pose.x + OFFSET_TRAY*math.cos(robot_orientation), 
+        robot_pose.x + OFFSET_TRAY*math.cos(robot_orientation),
+        ROBOT_TRAY_HEIGHT
+    )
+    
 
 
 def get_closest_table_position_and_distance():
