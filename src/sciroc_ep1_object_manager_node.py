@@ -222,7 +222,7 @@ def get_scene_object_list(req):
 def set_position(goal_x, goal_y,goal_z, object_to_move):
     state_msg = ModelState()
 
-    state_msg.model_name = objeto
+    state_msg.model_name = object_to_move
     state_msg.pose.position.x = goal_x
     state_msg.pose.position.y = goal_y
     state_msg.pose.position.z = goal_z
