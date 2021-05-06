@@ -96,7 +96,7 @@ class sciroc_ep1_object_manager:
     
 
 
-def talker(ebws):
+def talker(se1om):
     if VERBOSE:
         print ("TALKER")
 
@@ -111,7 +111,7 @@ def talker(ebws):
         #get_robot_position()
         #get_robot_orientation()
         #load_gazebo_models("bottle_red_wine")
-        print(get_closest_table_position_and_distance())
+        print(get_closest_table_position_and_distance(se1om))
         
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
@@ -290,10 +290,10 @@ def get_robot_tray_position():
     
 
 
-def get_closest_table_position_and_distance():
+def get_closest_table_position_and_distance(se1om):
     min_distance = 1000000
     closest_table_position = np.array([0,0])
-    for table in self.list_of_tables:
+    for table in se1om.list_of_tables:
         try:
             model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
             resp_coordinates = model_coordinates(table, '')
@@ -376,10 +376,10 @@ def getHandlePosition():
 
 
 def main(args):
-     ebws =  sciroc_ep1_object_manager()
+     se1om =  sciroc_ep1_object_manager()
      rospy.init_node('sciroc_ep1_object_manager', anonymous=True) #CHECK IF REMOVE 'PROVIDER'
      
-     listener(ebws)
+     listener(se1om)
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
      s = rospy.Service('/sciroc_object_manager/reset_tray', ResetTray, reset_tray_srv) 
@@ -390,7 +390,7 @@ def main(args):
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
      try:
-         talker(ebws)
+         talker(se1om)
          rospy.spin()
      except KeyboardInterrupt:
            print ("Shutting down sciroc_ep1_object_manager module")
