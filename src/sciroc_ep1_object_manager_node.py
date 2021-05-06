@@ -112,6 +112,7 @@ def talker(se1om):
         #get_robot_orientation()
         #load_gazebo_models("bottle_red_wine")
         print(get_closest_table_position_and_distance(se1om))
+        get_robot_tray_position()
         
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
@@ -244,7 +245,7 @@ def set_position(goal_x, goal_y,goal_z, object_to_move):
     except rospy.ServiceException, e:
        print "Service call failed: %s" % e
 
-def get_robot_position():
+def get_robot_position():           #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -257,7 +258,7 @@ def get_robot_position():
         print("robot pose " + str(resp_coordinates.pose.position.y))
     return np.array([resp_coordinates.pose.position.x, resp_coordinates.pose.position.y])
     
-def get_robot_orientation():
+def get_robot_orientation():        #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -278,7 +279,7 @@ def get_robot_orientation():
         print("robot orientation " + yaw)
     return yaw
     
-def get_robot_tray_position():
+def get_robot_tray_position():          
     robot_pose = get_robot_position()
     robot_orientation = get_robot_orientation()
     
@@ -290,7 +291,7 @@ def get_robot_tray_position():
     
 
 
-def get_closest_table_position_and_distance(se1om):
+def get_closest_table_position_and_distance(se1om): #OK
     min_distance = 1000000
     closest_table_position = np.array([0,0])
     for table in se1om.list_of_tables:
