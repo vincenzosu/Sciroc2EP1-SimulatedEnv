@@ -108,9 +108,11 @@ def talker(ebws):
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
-        get_robot_position()
-        get_robot_orientation()
+        #get_robot_position()
+        #get_robot_orientation()
         #load_gazebo_models("bottle_red_wine")
+        print(get_closest_table_position_and_distance())
+        
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
@@ -262,19 +264,18 @@ def get_robot_orientation():
     except rospy.ServiceException, e:
         print "ServiceProxy failed: %s"%e
         exit(0)
+    quaternion = (
+        resp_coordinates.pose.orientation.x,
+        resp_coordinates.pose.orientation.y,
+        resp_coordinates.pose.orientation.z,
+        resp_coordinates.pose.orientation.w)
+    euler = tf.transformations.euler_from_quaternion(quaternion)
+    roll = euler[0]
+    pitch = euler[1]
+    yaw = euler[2]
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
-        print("robot orintation " )
-        print( resp_coordinates.pose)
-        quaternion = (
-            resp_coordinates.pose.orientation.x,
-            resp_coordinates.pose.orientation.y,
-            resp_coordinates.pose.orientation.z,
-            resp_coordinates.pose.orientation.w)
-        euler = tf.transformations.euler_from_quaternion(quaternion)
-        roll = euler[0]
-        pitch = euler[1]
-        yaw = euler[2]
+        print("robot orientation " + yaw)
     return yaw
     
 def get_robot_tray_position():
@@ -359,23 +360,6 @@ def getHandlePosition():
     return joint_prop_handle.position[0]
     
     
-    
-
-def getTrolleyPosition():
-    try:
-        model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
-        resp_coordinates = model_coordinates('pushcart::cart_front_steer', 'chassis')
-        print '\n'
-        print 'Status.success = ', resp_coordinates.success
-        print("---- Pushcart pose \n: " + str(resp_coordinates.pose.position))
-        #print("Quaternion of X : " + str(resp_coordinates.pose.orientation.x))
-
-    except rospy.ServiceException as e:
-        rospy.loginfo("Get Model State service call failed:  {0}".format(e))
-        
-    #return joint_prop_handle.position[0]
-
-
 
 #def getScene(benchmark_name):
 #    scene_map = {
