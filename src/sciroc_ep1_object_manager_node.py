@@ -112,7 +112,8 @@ def talker(se1om):
         
         #get_robot_position()
         #get_robot_orientation()
-        load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
+        #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
+        spawn_three_objs("beer", "beer", "beer")
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
@@ -166,20 +167,20 @@ def get_three_objects_srv(req):
     print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
     return GetThreeObjects.srvResponse(True, "")
     
-def spawn_three_obj():
+def spawn_three_objs(obj0, obj1, obj2):
     global TABLE_BANK_POSE
     global OFFSET
-    load_and_spawn_gazebo_models("beer", 
+    load_and_spawn_gazebo_models(obj0, 
                     TABLE_BANK_POSE[0], 
                     TABLE_BANK_POSE[1] - OFFSET, 
                     TABLE_BANK_POSE[2])   
 
-    load_and_spawn_gazebo_models("beer", 
+    load_and_spawn_gazebo_models(obj1, 
                     TABLE_BANK_POSE[0], 
                     TABLE_BANK_POSE[1], 
                     TABLE_BANK_POSE[2])   
                     
-    load_and_spawn_gazebo_models("beer", 
+    load_and_spawn_gazebo_models(obj2, 
                     TABLE_BANK_POSE[0], 
                     TABLE_BANK_POSE[1] + OFFSET, 
                     TABLE_BANK_POSE[2])   
