@@ -35,6 +35,8 @@ ROBOT_TRAY_HEIGHT = 0               #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 STARTING_BANK_HEIGHT = 0            #TODO
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
+# distance of objects from the center of the table 
+OFFSET = 0.15
 
 SPAWN_POSE_1 = Pose(position=Point(x=0.75, y=-0.3, z=TABLE_CAFFE_HEIGHT))
 SPAWN_POSE_2 = Pose(position=Point(x=0.75, y=0.0, z=TABLE_CAFFE_HEIGHT))
@@ -131,7 +133,21 @@ def move_objects_on_the_closest_table_srv(req):
     if table_distance > MIN_DIST_TO_MOVE_OBJS_ON_TABLE:
         return MoveObjectsOnClosestTable.srvResponse(False, "")
     
-#    self.objects_on_robot_tray #TODO 
+#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
+    set_position(closest_table_position.x - OFFSET, 
+                closest_table_position.y + OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                self.objects_on_robot_tray[0])
+
+    set_position(closest_table_position.x + OFFSET, 
+                closest_table_position.y - OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                self.objects_on_robot_tray[1)
+
+    set_position(closest_table_position.x + OFFSET, 
+                closest_table_position.y + OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                self.objects_on_robot_tray[2])
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
     
@@ -199,7 +215,7 @@ def get_scene_object_list(req):
     return []
 
 
-def set_item(goal_x, goal_y,goal_z, object_to_move):
+def set_position(goal_x, goal_y,goal_z, object_to_move):
     state_msg = ModelState()
 
     state_msg.model_name = objeto
@@ -232,6 +248,22 @@ def get_robot_position():
         print 'Status.success = ', resp_coordinates.success
         print("robot pose " + str(resp_coordinates.pose.position.x))
     return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
+    
+def get_robot_tray_position():
+    robot_pose = get_robot_position()
+    
+    
+    try:
+        model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
+        resp_coordinates = model_coordinates('tiago', '')
+    except rospy.ServiceException, e:
+        print "ServiceProxy failed: %s"%e
+        exit(0)
+    if VERBOSE:
+        print 'Status.success = ', resp_coordinates.success
+        print("robot pose " + str(resp_coordinates.pose.position.x))
+    return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
+
 
 
 def get_closest_table_position_and_distance():
@@ -347,8 +379,6 @@ def main(args):
      s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
      s = rospy.Service('/sciroc_object_manager/get_three_objects', GetThreeObjects, get_three_objects_srv) 
      s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 
-     
-    
      
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
