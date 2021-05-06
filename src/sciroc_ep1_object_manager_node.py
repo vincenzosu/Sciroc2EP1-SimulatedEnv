@@ -104,7 +104,7 @@ def talker(se1om):
     r = rospy.Rate(10) #10hz
 
     msg = Float64()
-    load_gazebo_models("bottle_red_wine")
+    load_and_spawn_gazebo_models("beer", 5, -2, 1.6)
     while not rospy.is_shutdown():
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
@@ -160,6 +160,8 @@ def move_objects_on_the_closest_table_srv(req):
 def get_three_objects_srv(req):  
     #TODO
     # string1, string2, string3
+    
+    
     print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
     return GetThreeObjects.srvResponse(True, "")
     
@@ -185,25 +187,21 @@ def spawn_sdf_model(name, path, pose, reference_frame):
         description_xml = model_file.read().replace('\n', '')
         spawn_sdf(name, description_xml, pose,reference_frame)
         
-def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
+def load_and_spawn_gazebo_models(obj_name, x_obj, y_obj, z_obj):   
     model_list = []
-
     world_reference_frame = "world"
-
     # sorting_demo model path  
     ep1_models_path = rospkg.RosPack().get_path('sciroc_ep1_object_manager') + "/models/" 
-
     # Spawn object
-    blocks_table_name = obj_name
-    blocks_table_path = ep1_models_path + "/" + blocks_table_name+ "/model.sdf"
-    blocks_table_pose = Pose(position=Point(x=0.75, y=0.0, z=1.6))
-
+    object_name = obj_name
+    object_path = ep1_models_path + "/" + object_name+ "/model.sdf"
+    object_pose = Pose(position=Point(x=x_obj, y=y_obj, z=y_obj))
     global object_counter 
-    spawn_sdf_model(blocks_table_name+str(object_counter), 
-        blocks_table_path, 
-        blocks_table_pose, 
+    spawn_sdf_model(object_name+str(object_counter), 
+        object_path, 
+        object_pose, 
         world_reference_frame)
-    model_list.append(blocks_table_name+str(object_counter))
+    model_list.append(object_name+str(object_counter))
 
     object_counter+= 1
     # Spawn Trays Table
@@ -213,8 +211,6 @@ def load_gazebo_models(obj_name):   #TEST WITH BEER THAT IS NOT STATIC
 
     #spawn_sdf_model(trays_table_name, trays_table_path, trays_table_pose, world_reference_frame)
     #model_list.append(trays_table_name)
-
-
     return model_list
     
 def is_there_an_object_on(x,y,z):
