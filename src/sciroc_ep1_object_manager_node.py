@@ -97,7 +97,7 @@ class sciroc_ep1_object_manager:
 
 def talker(ebws):
     if VERBOSE:
-        print ("subcribed on sensor_distances")
+        print ("TALKER")
 
     r = rospy.Rate(10) #10hz
 
@@ -251,6 +251,7 @@ def get_robot_position():
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
         print("robot pose " + str(resp_coordinates.pose.position.x))
+        print("robot pose " + str(resp_coordinates.pose.position.y))
     return np.array(resp_coordinates.pose.position.x, resp_coordinates.pose.position.y)
     
 def get_robot_orientation():
