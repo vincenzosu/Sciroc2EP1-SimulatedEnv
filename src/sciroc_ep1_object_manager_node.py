@@ -5,6 +5,7 @@ import roslaunch
 import rospkg
 import os
 import sys
+import tf
 import numpy as np
 
 from sensor_msgs.msg import Image
