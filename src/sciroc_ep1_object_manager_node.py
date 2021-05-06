@@ -300,7 +300,8 @@ def get_closest_table_position_and_distance(se1om):
             curr_table_coords = np.array([
                 resp_coordinates.pose.position.x,
                 resp_coordinates.pose.position.y])
-            curr_min_dist = (get_robot_position() - curr_table_coords).norm()
+#            curr_min_dist = (get_robot_position() - curr_table_coords).norm()
+            curr_min_dist = np.linalg.norm(get_robot_position() - curr_table_coords)
             if curr_min_dist  < min_distance:
                 closest_table_position = curr_table_coords
                 min_distance = curr_min_dist
