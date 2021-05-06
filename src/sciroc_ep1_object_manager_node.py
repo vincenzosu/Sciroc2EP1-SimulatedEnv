@@ -263,7 +263,7 @@ def get_robot_orientation():
         exit(0)
     if VERBOSE:
         print 'Status.success = ', resp_coordinates.success
-        print("robot orintation " + str(resp_coordinates.pose.orientation.yaw))
+        print("robot orintation " + resp_coordinates.pose)
     return resp_coordinates.pose.orientation.yaw
     
 def get_robot_tray_position():
