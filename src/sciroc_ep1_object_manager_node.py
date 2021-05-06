@@ -130,7 +130,7 @@ def callback(data):
     print ("initialized")
 
 
-def reset_tray_srv(req):  
+def move_objects_on_the_tray_srv(req):  
     print("reset_tray_srv service")
     return ResetTray.srvResponse(True, "")
 
@@ -170,14 +170,14 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     #TODO AGGINUGERE ERRORE 1 su 3
     global TABLE_BANK_POSE
     global OFFSET
-    load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
-    load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
-    load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
-    monitor.objects_on_robot_tray = {obj0, obj1, obj2}
+    modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
+    modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
+    modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
+    monitor.objects_on_robot_tray = {model0, model1, model2}
 
     
 def change_the_objects_srv(req):  
-    #TODO
+    #TODO cambiare modelli di objects_on_robot_tray
     req.name_of_the_object_to_change
     print("change_the_objects_srv service")
     return ChangeTheObject.srvResponse(True, "")
@@ -213,8 +213,8 @@ def load_and_spawn_gazebo_models(obj_name, pose):
         object_path, 
         object_pose, 
         world_reference_frame)
-    model_list.append(object_name+str(object_counter))
-
+    current_model = object_name+str(object_counter)
+    model_list.append(current_model)
     object_counter+= 1
     # Spawn Trays Table
     #trays_table_name = "trays_table"
@@ -223,7 +223,7 @@ def load_and_spawn_gazebo_models(obj_name, pose):
 
     #spawn_sdf_model(trays_table_name, trays_table_path, trays_table_pose, world_reference_frame)
     #model_list.append(trays_table_name)
-    return model_list
+    return model_list, current_model
     
 def is_there_an_object_on(x,y,z):
     return False
@@ -394,7 +394,7 @@ def main(args):
      listener(se1om)
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_tray', MoveTheObjectsOnTheTray, move_objects_on_the_tray_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_tray', MoveObjectsOnTheTray, move_objects_on_the_tray_srv) 
      s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
      s = rospy.Service('/sciroc_object_manager/get_three_objects', GetThreeObjects, get_three_objects_srv) 
      s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 
