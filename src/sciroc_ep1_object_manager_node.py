@@ -14,7 +14,7 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-from sciroc_ep1_object_manager.srv import ResetTray
+from sciroc_ep1_object_manager.srv import MoveObjectsOnTheTray
 from sciroc_ep1_object_manager.srv import MoveObjectsOnClosestTable
 from sciroc_ep1_object_manager.srv import GetThreeObjects
 from sciroc_ep1_object_manager.srv import ChangeTheObject
@@ -24,10 +24,8 @@ from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
 
-
 from geometry_msgs.msg import Pose, Point, Quaternion
 from gazebo_msgs.srv import SpawnModel, DeleteModel
-
 
 
 VERBOSE = True
@@ -36,7 +34,7 @@ object_counter = 0
 
 ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
-COUNTER_H = 1.3          #TODO
+COUNTER_H = 1.3                     #TODO
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
@@ -168,17 +166,15 @@ def get_three_objects_srv(req):
     print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
     return GetThreeObjects.srvResponse(True, "")
     
-def spawn_three_objs(obj0, obj1, obj2):
+def spawn_three_objs(obj0, obj1, obj2, monitor):
+    #TODO AGGINUGERE ERRORE 1 su 3
     global TABLE_BANK_POSE
     global OFFSET
-    load_and_spawn_gazebo_models(obj0, 
-                    SPAWN_POSE_1)   
+    load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
+    load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
+    load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
+    monitor.objects_on_robot_tray = {obj0, obj1, obj2}
 
-    load_and_spawn_gazebo_models(obj1, 
-                    SPAWN_POSE_2)   
-                    
-    load_and_spawn_gazebo_models(obj2, 
-                    SPAWN_POSE_3)   
     
 def change_the_objects_srv(req):  
     #TODO
@@ -398,7 +394,7 @@ def main(args):
      listener(se1om)
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
-     s = rospy.Service('/sciroc_object_manager/reset_tray', ResetTray, reset_tray_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_tray', MoveTheObjectsOnTheTray, move_objects_on_the_tray_srv) 
      s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
      s = rospy.Service('/sciroc_object_manager/get_three_objects', GetThreeObjects, get_three_objects_srv) 
      s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 

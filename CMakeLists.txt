@@ -16,7 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  ResetTray.srv
+  MoveObjectsOnTheTray.srv
   MoveObjectsOnClosestTable.srv
   GetThreeObjects.srv
   ChangeTheObject.srv
