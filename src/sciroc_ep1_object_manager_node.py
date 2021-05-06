@@ -104,14 +104,14 @@ def talker(se1om):
     r = rospy.Rate(10) #10hz
 
     msg = Float64()
-    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
+#    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
     while not rospy.is_shutdown():
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
         #get_robot_position()
         #get_robot_orientation()
-        load_and_spawn_gazebo_models("beer", 5, -2, 1.6)
+        load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
