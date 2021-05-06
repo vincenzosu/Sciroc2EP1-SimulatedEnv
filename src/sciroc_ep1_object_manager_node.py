@@ -111,7 +111,7 @@ def talker(se1om):
         
         #get_robot_position()
         #get_robot_orientation()
-        #load_gazebo_models("bottle_red_wine")
+        load_and_spawn_gazebo_models("beer", 5, -2, 1.6)
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
