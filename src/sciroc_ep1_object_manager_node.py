@@ -265,7 +265,11 @@ def get_robot_orientation():
         print 'Status.success = ', resp_coordinates.success
         print("robot orintation " )
         print( resp_coordinates.pose)
-    return 0#resp_coordinates.pose.orientation.yaw
+        euler = tf.transformations.euler_from_quaternion(resp_coordinates.pose.orientation)
+        roll = euler[0]
+        pitch = euler[1]
+        yaw = euler[2]
+    return yaw
     
 def get_robot_tray_position():
     robot_pose = get_robot_position()
