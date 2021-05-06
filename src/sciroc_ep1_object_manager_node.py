@@ -37,7 +37,7 @@ object_counter = 0
 ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 COUNTER_H = 1.3          #TODO
-BNK_POSE = np.array([4.5, -1.4, STARTING_BANK_HEIGHT])
+COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
