@@ -292,7 +292,7 @@ def get_robot_tray_position():
 
 def get_closest_table_position_and_distance():
     min_distance = 1000000
-    closest_table_position = np.array(0,0)
+    closest_table_position = np.array([0,0])
     for table in self.list_of_tables:
         try:
             model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
