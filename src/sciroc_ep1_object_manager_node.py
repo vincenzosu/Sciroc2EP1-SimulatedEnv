@@ -28,23 +28,24 @@ from gazebo_msgs.srv import GetJointProperties
 from geometry_msgs.msg import Pose, Point, Quaternion
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 
-object_counter = 0
 
 
 VERBOSE = True
 
+object_counter = 0
+
 ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
-STARTING_BANK_HEIGHT = 1.3          #TODO
-TABLE_BANK_POSE = np.array([4.5, -1.7, STARTING_BANK_HEIGHT])
+COUNTER_H = 1.3          #TODO
+BNK_POSE = np.array([4.5, -1.4, STARTING_BANK_HEIGHT])
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
 OFFSET_TRAY = 0.1
 
-SPAWN_POSE_1 = Pose(position=Point(x=0.75, y=-0.3, z=TABLE_CAFFE_HEIGHT))
-SPAWN_POSE_2 = Pose(position=Point(x=0.75, y=0.0, z=TABLE_CAFFE_HEIGHT))
-SPAWN_POSE_3 = Pose(position=Point(x=0.75, y=0.3, z=TABLE_CAFFE_HEIGHT))
+SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
+SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
+SPAWN_POSE_3 = Pose(position=Point(x=4.5, y=-1.4-OFFSET, z=COUNTER_H))
 
 
 class sciroc_ep1_object_manager:
@@ -171,20 +172,13 @@ def spawn_three_objs(obj0, obj1, obj2):
     global TABLE_BANK_POSE
     global OFFSET
     load_and_spawn_gazebo_models(obj0, 
-                    TABLE_BANK_POSE[0], 
-                    TABLE_BANK_POSE[1] - OFFSET, 
-                    TABLE_BANK_POSE[2])   
+                    SPAWN_POSE_1)   
 
     load_and_spawn_gazebo_models(obj1, 
-                    TABLE_BANK_POSE[0], 
-                    TABLE_BANK_POSE[1], 
-                    TABLE_BANK_POSE[2])   
+                    SPAWN_POSE_2)   
                     
     load_and_spawn_gazebo_models(obj2, 
-                    TABLE_BANK_POSE[0], 
-                    TABLE_BANK_POSE[1] + OFFSET, 
-                    TABLE_BANK_POSE[2])   
-                                        
+                    SPAWN_POSE_3)   
     
 def change_the_objects_srv(req):  
     #TODO
@@ -208,7 +202,7 @@ def spawn_sdf_model(name, path, pose, reference_frame):
         description_xml = model_file.read().replace('\n', '')
         spawn_sdf(name, description_xml, pose,reference_frame)
         
-def load_and_spawn_gazebo_models(obj_name, x_obj, y_obj, z_obj):   
+def load_and_spawn_gazebo_models(obj_name, pose):   
     model_list = []
     world_reference_frame = "world"
     # sorting_demo model path  
@@ -216,7 +210,8 @@ def load_and_spawn_gazebo_models(obj_name, x_obj, y_obj, z_obj):
     # Spawn object
     object_name = obj_name
     object_path = ep1_models_path + "/" + object_name+ "/model.sdf"
-    object_pose = Pose(position=Point(x=x_obj, y=y_obj, z=z_obj))
+    #object_pose = Pose(position=Point(x=x_obj, y=y_obj, z=z_obj))
+    object_pose = pose
     global object_counter 
     spawn_sdf_model(object_name+str(object_counter), 
         object_path, 
