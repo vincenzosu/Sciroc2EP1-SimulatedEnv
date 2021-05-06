@@ -297,8 +297,9 @@ def get_closest_table_position_and_distance(se1om):
         try:
             model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
             resp_coordinates = model_coordinates(table, '')
-            curr_table_coords = np.array(resp_coordinates.pose.position.x,
-                resp_coordinates.pose.position.y)
+            curr_table_coords = np.array([
+                resp_coordinates.pose.position.x,
+                resp_coordinates.pose.position.y])
             curr_min_dist = (get_robot_position() - curr_table_coords).norm()
             if curr_min_dist  < min_distance:
                 closest_table_position = curr_table_coords
