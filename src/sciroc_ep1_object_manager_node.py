@@ -35,7 +35,8 @@ VERBOSE = True
 
 ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
-STARTING_BANK_HEIGHT = 0            #TODO
+STARTING_BANK_HEIGHT = 1.3          #TODO
+TABLE_BANK_POSE = np.array([4.5, -2, STARTING_BANK_HEIGHT])
 MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
@@ -166,7 +167,23 @@ def get_three_objects_srv(req):
     return GetThreeObjects.srvResponse(True, "")
     
 def spawn_three_obj():
-        
+    global TABLE_BANK_POSE
+    global OFFSET
+    load_and_spawn_gazebo_models("beer", 
+                    TABLE_BANK_POSE[0], 
+                    TABLE_BANK_POSE[1] - OFFSET, 
+                    TABLE_BANK_POSE[2])   
+
+    load_and_spawn_gazebo_models("beer", 
+                    TABLE_BANK_POSE[0], 
+                    TABLE_BANK_POSE[1], 
+                    TABLE_BANK_POSE[2])   
+                    
+    load_and_spawn_gazebo_models("beer", 
+                    TABLE_BANK_POSE[0], 
+                    TABLE_BANK_POSE[1] + OFFSET, 
+                    TABLE_BANK_POSE[2])   
+                                        
     
 def change_the_objects_srv(req):  
     #TODO
