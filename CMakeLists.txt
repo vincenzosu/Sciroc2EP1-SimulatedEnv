@@ -16,10 +16,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  MoveObjectsOnTheTray.srv
-  MoveObjectsOnClosestTable.srv
-  GetThreeObjects.srv
-  ChangeTheObject.srv
+  MoveItemsOnTheTray.srv
+  MoveItemsOnClosestTable.srv
+  GetThreeOrderedItems.srv
+  ChangeTheItem.srv
 )
 
 ## Generate actions in the 'action' folder
