@@ -16,7 +16,7 @@ from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
 from sciroc_ep1_object_manager.srv import MoveObjectsOnTheTray
 from sciroc_ep1_object_manager.srv import MoveObjectsOnClosestTable
-from sciroc_ep1_object_manager.srv import GetThreeObjects
+from sciroc_ep1_object_manager.srv import GetThreeOrderedObjects
 from sciroc_ep1_object_manager.srv import ChangeTheObject
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
@@ -36,7 +36,7 @@ ROBOT_TRAY_HEIGHT = 1.2             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 COUNTER_H = 1.3                     #TODO
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
-MIN_DIST_TO_MOVE_OBJS_ON_TABLE = 0  #TODO
+MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
 OFFSET_TRAY = 0.1
@@ -70,7 +70,7 @@ class sciroc_ep1_object_manager:
             "none"
         }
 
-        self.bank_object = {"table"}				
+        self.counter_object = {"table"}				
 
           
     def startSim(self):
@@ -105,6 +105,12 @@ def talker(se1om):
 
     msg = Float64()
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
+
+
+    spawn_three_objs("beer", "beer", "beer")
+        
+    
+    
     while not rospy.is_shutdown():
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
@@ -112,7 +118,7 @@ def talker(se1om):
         #get_robot_position()
         #get_robot_orientation()
         #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
-        spawn_three_objs("beer", "beer", "beer")
+        #spawn_three_objs("beer", "beer", "beer")
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
@@ -131,14 +137,38 @@ def callback(data):
 
 
 def move_objects_on_the_tray_srv(req):  
-    print("reset_tray_srv service")
-    return ResetTray.srvResponse(True, "")
+    print("move_objects_on_the_tray_srv service")
+    
+    counter_distance = get_robot_counter_distance()
+    if counter_distance > MIN_DIST_TO_MOVE_OBJS:
+        return MoveObjectsOnClosestTable.srvResponse(False, "")
+ 
+    tray_pose = get_robot_tray_position()
+#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[0])
+
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[1])
+
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[2])
+    print("move_objects_on_the_tray_srv service")
+    return MoveObjectsOnTheTray.srvResponse(True, "")
 
 def move_objects_on_the_closest_table_srv(req):  
     #TODO
     closest_table_position, table_distance = get_closest_table_position_and_distance()
-    if table_distance > MIN_DIST_TO_MOVE_OBJS_ON_TABLE:
-        return MoveObjectsOnClosestTable.srvResponse(False, "")
+    if table_distance > MIN_DIST_TO_MOVE_OBJS:
+        return MoveObjectsOnTheTray.srvResponse(False, "")
+    
+    
     
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
     set_position(closest_table_position.x - OFFSET, 
@@ -158,13 +188,13 @@ def move_objects_on_the_closest_table_srv(req):
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
     
-def get_three_objects_srv(req):  
+def get_three_ordered_objects_srv(req):  
     #TODO
     # string1, string2, string3
     
     
-    print("get_three_objects_srvmove_objects_on_the_closest_table_srv service")
-    return GetThreeObjects.srvResponse(True, "")
+    print("get_three_objects_srv service")
+    return GetThreeOrderedObjects.srvResponse(True, "")
     
 def spawn_three_objs(obj0, obj1, obj2, monitor):
     #TODO AGGINUGERE ERRORE 1 su 3
@@ -322,6 +352,21 @@ def get_closest_table_position_and_distance(se1om): #OK
     return closest_table_position, min_distance
 
 
+def get_robot_counter_distance(se1om): #OK
+    try:
+        model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
+        resp_coordinates = model_coordinates(se1om.counter_object, '')
+        counter_coords = np.array([
+            resp_coordinates.pose.position.x,
+            resp_coordinates.pose.position.y])
+#            curr_min_dist = (get_robot_position() - curr_table_coords).norm()
+        dist = np.linalg.norm(get_robot_position() - counter_coords)
+        
+    except rospy.ServiceException, e:
+        print "ServiceProxy failed: %s"%e
+        #exit(0)
+    
+    return dist
 
 
 
@@ -396,7 +441,7 @@ def main(args):
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
      s = rospy.Service('/sciroc_object_manager/move_objects_on_the_tray', MoveObjectsOnTheTray, move_objects_on_the_tray_srv) 
      s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
-     s = rospy.Service('/sciroc_object_manager/get_three_objects', GetThreeObjects, get_three_objects_srv) 
+     s = rospy.Service('/sciroc_object_manager/get_three_ordered_objects', GetThreeOrderedObjects, get_three_ordered_objects_srv) 
      s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 
      
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
