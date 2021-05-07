@@ -235,7 +235,7 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     monitor.objects_on_robot_tray = {model0, model1, model2}
 
     
-def change_the_items_srv(req):  
+def change_the_item_srv(req):  
     #TODO cambiare modelli di objects_on_robot_tray
     req.name_of_the_object_to_change
     print("change_the_objects_srv service")
