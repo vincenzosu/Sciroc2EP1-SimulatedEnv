@@ -128,7 +128,8 @@ def talker(se1om):
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
-
+        spawn_three_objs("beer", "beer", "beer", se1om)
+        move_items_on_the_tray(se1om)
         
         r.sleep()
 
