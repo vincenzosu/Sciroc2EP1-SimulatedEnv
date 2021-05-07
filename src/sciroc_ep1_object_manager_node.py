@@ -107,8 +107,7 @@ def talker(se1om):
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
 
 
-    spawn_three_objs("beer", "beer", "beer", se1om)
-    move_items_on_the_tray(se1om)
+    
         
     
     
@@ -120,6 +119,11 @@ def talker(se1om):
         #get_robot_orientation()
         #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
         #spawn_three_objs("beer", "beer", "beer")
+        
+        spawn_three_objs("beer", "beer", "beer", se1om)
+        move_items_on_the_tray(se1om)
+    
+        
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
