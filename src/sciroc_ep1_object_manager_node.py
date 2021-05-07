@@ -64,11 +64,11 @@ class sciroc_ep1_object_manager:
             "cafe_table_"
         }
         
-        self.objects_on_robot_tray = (
+        self.objects_on_robot_tray = {
             "none",
             "none",
             "none"
-        )
+        }
 
         self.counter_object = "table"			
 
@@ -140,7 +140,7 @@ def callback(data):
 
 def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
     print("move_objects_on_the_tray_srv service")
-    
+    print(monitor.objects_on_robot_tray)
     counter_distance = get_robot_counter_distance(monitor)
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
