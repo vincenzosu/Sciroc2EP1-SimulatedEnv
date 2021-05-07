@@ -14,7 +14,7 @@
 
   <!-- start up world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find sciroc_ep1_object_manager)/worlds/ep1-world3.sdf"/>
+    <arg name="world_name" value="$(find sciroc_ep1_object_manager)/worlds/ep1-world.sdf"/>
     <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="debug" value="$(arg debug)"/>
