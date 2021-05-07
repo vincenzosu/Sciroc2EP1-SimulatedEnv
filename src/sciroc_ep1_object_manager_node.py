@@ -64,11 +64,11 @@ class sciroc_ep1_object_manager:
             "cafe_table_"
         }
         
-        self.objects_on_robot_tray = [
+        self.objects_on_robot_tray = (
             "none",
             "none",
             "none"
-        ]
+        )
 
         self.counter_object = "table"			
 
