@@ -107,6 +107,8 @@ def talker(se1om):
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
 
 
+    spawn_three_objs("beer", "beer", "beer", se1om)
+    move_items_on_the_tray(se1om)
     
         
     
@@ -119,11 +121,6 @@ def talker(se1om):
         #get_robot_orientation()
         #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
         #spawn_three_objs("beer", "beer", "beer")
-        
-        spawn_three_objs("beer", "beer", "beer", se1om)
-        move_items_on_the_tray(se1om)
-    
-        
         print(get_closest_table_position_and_distance(se1om))
         get_robot_tray_position()
         
@@ -153,17 +150,17 @@ def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                self.objects_on_robot_tray[0])
+                monitor.objects_on_robot_tray[0])
 
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                self.objects_on_robot_tray[1])
+                monitor.objects_on_robot_tray[1])
 
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                self.objects_on_robot_tray[2])
+                monitor.objects_on_robot_tray[2])
     print("move_objects_on_the_tray_srv service")
     return MoveItemsOnTheTray.srvResponse(True, "")
 
