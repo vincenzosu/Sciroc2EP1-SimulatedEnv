@@ -163,7 +163,7 @@ def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
                 tray_pose[2], 
                 monitor.objects_on_robot_tray[2])
     print("move_objects_on_the_tray_srv service")
-    return MoveItemsOnTheTray.srvResponse(True, "")
+
 
 
 
