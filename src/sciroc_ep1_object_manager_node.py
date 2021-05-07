@@ -108,7 +108,7 @@ def talker(se1om):
 
 
     spawn_three_objs("beer", "beer", "beer", se1om)
-    move_items_on_the_tray()
+    move_items_on_the_tray(se1om)
         
     
     
@@ -137,10 +137,10 @@ def callback(data):
     print ("initialized")
 
 
-def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
+def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
     print("move_objects_on_the_tray_srv service")
     
-    counter_distance = get_robot_counter_distance()
+    counter_distance = get_robot_counter_distance(monitor)
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
         return 
  
