@@ -121,8 +121,8 @@ def talker(se1om):
         #get_robot_orientation()
         #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
         #spawn_three_objs("beer", "beer", "beer")
-        print(get_closest_table_position_and_distance(se1om))
-        get_robot_tray_position()
+        #print(get_closest_table_position_and_distance(se1om))
+        #get_robot_tray_position()
         
         print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
@@ -234,7 +234,8 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
     monitor.objects_on_robot_tray = {model0, model1, model2}
-
+    print ("SPAWNED")
+    print (monitor.objects_on_robot_tray)
     
 def change_the_item_srv(req):  
     #TODO cambiare modelli di objects_on_robot_tray
