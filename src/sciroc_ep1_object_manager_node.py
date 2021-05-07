@@ -70,7 +70,7 @@ class sciroc_ep1_object_manager:
             "none"
         }
 
-        self.counter_object = {"table"}				
+        self.counter_object = "table"			
 
           
     def startSim(self):
