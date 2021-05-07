@@ -14,10 +14,10 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-from sciroc_ep1_object_manager.srv import MoveObjectsOnTheTray
-from sciroc_ep1_object_manager.srv import MoveObjectsOnClosestTable
-from sciroc_ep1_object_manager.srv import GetThreeOrderedObjects
-from sciroc_ep1_object_manager.srv import ChangeTheObject
+from sciroc_ep1_object_manager.srv import MoveItemsOnTheTray
+from sciroc_ep1_object_manager.srv import MoveItemsOnClosestTable
+from sciroc_ep1_object_manager.srv import GetThreeOrderedItems
+from sciroc_ep1_object_manager.srv import ChangeTheItem
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
@@ -136,12 +136,12 @@ def callback(data):
     print ("initialized")
 
 
-def move_objects_on_the_tray_srv(req):  
+def move_items_on_the_tray_srv(req):  
     print("move_objects_on_the_tray_srv service")
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveObjectsOnClosestTable.srvResponse(False, "")
+        return MoveItemsOnClosestTable.srvResponse(False, "")
  
     tray_pose = get_robot_tray_position()
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
@@ -160,13 +160,13 @@ def move_objects_on_the_tray_srv(req):
                 tray_pose[2], 
                 self.objects_on_robot_tray[2])
     print("move_objects_on_the_tray_srv service")
-    return MoveObjectsOnTheTray.srvResponse(True, "")
+    return MoveItemsOnTheTray.srvResponse(True, "")
 
-def move_objects_on_the_closest_table_srv(req):  
+def move_items_on_the_closest_table_srv(req):  
     #TODO
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if table_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveObjectsOnTheTray.srvResponse(False, "")
+        return MoveItemsOnTheTray.srvResponse(False, "")
     
     
     
@@ -188,13 +188,13 @@ def move_objects_on_the_closest_table_srv(req):
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
     
-def get_three_ordered_objects_srv(req):  
+def get_three_ordered_items_srv(req):  
     #TODO
     # string1, string2, string3
     
     
     print("get_three_objects_srv service")
-    return GetThreeOrderedObjects.srvResponse(True, "")
+    return GetThreeOrderedItems.srvResponse(True, "")
     
 def spawn_three_objs(obj0, obj1, obj2, monitor):
     #TODO AGGINUGERE ERRORE 1 su 3
@@ -206,11 +206,11 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     monitor.objects_on_robot_tray = {model0, model1, model2}
 
     
-def change_the_objects_srv(req):  
+def change_the_items_srv(req):  
     #TODO cambiare modelli di objects_on_robot_tray
     req.name_of_the_object_to_change
     print("change_the_objects_srv service")
-    return ChangeTheObject.srvResponse(True, "")
+    return ChangeTheItem.srvResponse(True, "")
     
   
 def spawn_sdf(name, description_xml, pose, reference_frame):
@@ -439,10 +439,10 @@ def main(args):
      listener(se1om)
 
      #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_tray', MoveObjectsOnTheTray, move_objects_on_the_tray_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_objects_on_the_closest_table', MoveObjectsOnClosestTable, move_objects_on_the_closest_table_srv) 
-     s = rospy.Service('/sciroc_object_manager/get_three_ordered_objects', GetThreeOrderedObjects, get_three_ordered_objects_srv) 
-     s = rospy.Service('/sciroc_object_manager/change_the_objects', ChangeTheObject, change_the_objects_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_items_on_the_tray', MoveItemsOnTheTray, move_items_on_the_tray_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_items_on_the_closest_table', MoveItemsOnClosestTable, move_items_on_the_closest_table_srv) 
+     s = rospy.Service('/sciroc_object_manager/get_three_ordered_items', GetThreeOrderedItems, get_three_ordered_items_srv) 
+     s = rospy.Service('/sciroc_object_manager/change_the_item', ChangeTheItem, change_the_item_srv) 
      
      #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
