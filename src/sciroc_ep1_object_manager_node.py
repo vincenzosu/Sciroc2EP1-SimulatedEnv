@@ -32,7 +32,7 @@ VERBOSE = True
 
 object_counter = 0
 
-ROBOT_TRAY_HEIGHT = 1.2             #TODO
+ROBOT_TRAY_HEIGHT = 1.5             #TODO
 TABLE_CAFFE_HEIGHT = 1              #TODO
 COUNTER_H = 1.3                     #TODO
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
@@ -53,7 +53,7 @@ class sciroc_ep1_object_manager:
 		#				   self.ccw_right_callback, queue_size=1)   
         self.robot_pose = [0.0,0.0]		
 		
-        self.list_of_tables = {
+        self.list_of_tables = {   #set
             "cafe_table", 
             "cafe_table_0", 
             "cafe_table_1", 
@@ -64,7 +64,7 @@ class sciroc_ep1_object_manager:
             "cafe_table_"
         }
         
-        self.objects_on_robot_tray = (
+        self.objects_on_robot_tray = (  #tuple
             "none",
             "none",
             "none"
