@@ -108,6 +108,7 @@ def talker(se1om):
 
 
     spawn_three_objs("beer", "beer", "beer")
+    move_items_on_the_tray()
         
     
     
@@ -134,6 +135,34 @@ def talker(se1om):
 def callback(data):
     rospy.loginfo("%s is age: %d" % (data.name, data.age))
     print ("initialized")
+
+
+def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
+    print("move_objects_on_the_tray_srv service")
+    
+    counter_distance = get_robot_counter_distance()
+    if counter_distance > MIN_DIST_TO_MOVE_OBJS:
+        return 
+ 
+    tray_pose = get_robot_tray_position()
+#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[0])
+
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[1])
+
+    set_position(tray_pose[0], 
+                tray_pose[1],
+                tray_pose[2], 
+                self.objects_on_robot_tray[2])
+    print("move_objects_on_the_tray_srv service")
+    return MoveItemsOnTheTray.srvResponse(True, "")
+
 
 
 def move_items_on_the_tray_srv(req):  
