@@ -64,11 +64,11 @@ class sciroc_ep1_object_manager:
             "cafe_table_"
         }
         
-        self.objects_on_robot_tray = {
+        self.objects_on_robot_tray = (
             "none",
             "none",
             "none"
-        }
+        )
 
         self.counter_object = "table"			
 
@@ -233,7 +233,7 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
-    monitor.objects_on_robot_tray = {model0, model1, model2}
+    monitor.objects_on_robot_tray = (model0, model1, model2)
     print ("SPAWNED")
     print (monitor.objects_on_robot_tray)
     
