@@ -58,10 +58,8 @@ class sciroc_ep1_object_manager:
             "cafe_table_0", 
             "cafe_table_1", 
             "cafe_table_2", 
-            "cafe_table_3", 
-            "cafe_table_4", 
             "cafe_table_5",
-            "cafe_table_"
+            "cafe_table_6"
         }
         
         self.objects_on_robot_tray = (  #tuple
