@@ -145,6 +145,8 @@ def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
  
+    print (" ######################### I AM MOVING:")
+    print (monitor.objects_on_robot_tray)
     tray_pose = get_robot_tray_position()
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
     set_position(tray_pose[0], 
