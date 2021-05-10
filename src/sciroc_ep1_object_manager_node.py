@@ -33,7 +33,7 @@ VERBOSE = False
 object_counter = 0
 
 ROBOT_TRAY_HEIGHT = 1.5             #TODO
-TABLE_CAFFE_HEIGHT = 1              #TODO
+TABLE_CAFFE_HEIGHT = 1.2              #TODO
 COUNTER_H = 1.3                     #TODO
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
