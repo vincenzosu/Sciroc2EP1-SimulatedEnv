@@ -54,11 +54,15 @@ list_of_tables = {   #set
     "cafe_table_6"
 }
 
-available_objects = {
+available_objects = {   #set
     "beer",
-    "biscuit_box",
-    "bottle_beer"
-    "bottle_red_wine"
+    "bifrutas_tropical_can",
+    "biscuits_pack",
+    "coke_can",
+    "plastic_cup",
+    "pringles",
+    "pringles2",
+    "sprite",
 }
 
 objects_on_robot_tray = (  #tuple
@@ -161,32 +165,28 @@ def callback(data):
     print ("initialized")
 
 
-def move_items_on_the_tray(monitor):   #TO REMOVE!!!!!!!!!
-    print("move_objects_on_the_tray_srv service")
-    print(monitor.objects_on_robot_tray)
+def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
+    global objects_on_robot_tray
     counter_distance = get_robot_counter_distance(monitor)
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
  
-    print (" ######################### I AM MOVING:")
-    print (monitor.objects_on_robot_tray)
     tray_pose = get_robot_tray_position()
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                monitor.objects_on_robot_tray[0])
+                objects_on_robot_tray[0])
 
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                monitor.objects_on_robot_tray[1])
+                objects_on_robot_tray[1])
 
     set_position(tray_pose[0], 
                 tray_pose[1],
                 tray_pose[2], 
-                monitor.objects_on_robot_tray[2])
-    print("move_objects_on_the_tray_srv service")
+                objects_on_robot_tray[2])
 
 
 
@@ -198,23 +198,8 @@ def move_items_on_the_tray_srv(req):
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
         return MoveItemsOnClosestTable.srvResponse(False, "")
  
-    tray_pose = get_robot_tray_position()
-#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
-    set_position(tray_pose[0], 
-                tray_pose[1],
-                tray_pose[2], 
-                self.objects_on_robot_tray[0])
+    move_items_on_the_tray()
 
-    set_position(tray_pose[0], 
-                tray_pose[1],
-                tray_pose[2], 
-                self.objects_on_robot_tray[1])
-
-    set_position(tray_pose[0], 
-                tray_pose[1],
-                tray_pose[2], 
-                self.objects_on_robot_tray[2])
-    print("move_objects_on_the_tray_srv service")
     return MoveItemsOnTheTray.srvResponse(True, "")
 
 def move_items_on_the_closest_table_srv(req):  
@@ -223,28 +208,13 @@ def move_items_on_the_closest_table_srv(req):
     if table_distance > MIN_DIST_TO_MOVE_OBJS:
         return MoveItemsOnTheTray.srvResponse(False, "")
     
-    
-    
-#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
-    set_position(closest_table_position.x - OFFSET, 
-                closest_table_position.y + OFFSET,
-                TABLE_CAFFE_HEIGHT, 
-                self.objects_on_robot_tray[0])
-
-    set_position(closest_table_position.x + OFFSET, 
-                closest_table_position.y - OFFSET,
-                TABLE_CAFFE_HEIGHT, 
-                self.objects_on_robot_tray[1])
-
-    set_position(closest_table_position.x + OFFSET, 
-                closest_table_position.y + OFFSET,
-                TABLE_CAFFE_HEIGHT, 
-                self.objects_on_robot_tray[2])
+    move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
     
     
-def move_items_on_the_closest_table(monitor):  
+def move_items_on_the_closest_table():  
+    global objects_on_robot_tray
     closest_table_position, table_distance = get_closest_table_position_and_distance(monitor)    
     set_position(closest_table_position[0] - OFFSET, 
                 closest_table_position[1] + OFFSET,
@@ -274,12 +244,13 @@ def spawn_three_objs(obj0, obj1, obj2, monitor):
     #TODO AGGINUGERE ERRORE 1 su 3
     global TABLE_BANK_POSE
     global OFFSET
+    global monitor
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
     monitor.objects_on_robot_tray = (model0, model1, model2)
     print ("SPAWNED")
-    print (monitor.objects_on_robot_tray)
+    print (objects_on_robot_tray)
     
 def change_the_item_srv(req):  
     #TODO cambiare modelli di objects_on_robot_tray
