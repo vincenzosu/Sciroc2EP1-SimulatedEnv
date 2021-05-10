@@ -109,6 +109,7 @@ def talker(se1om):
 
     spawn_three_objs("beer", "beer", "beer", se1om)
     move_items_on_the_tray(se1om)
+    move_items_on_the_closest_table(se1om)
     
         
     
@@ -218,6 +219,29 @@ def move_items_on_the_closest_table_srv(req):
                 self.objects_on_robot_tray[2])
     print("move_objects_on_the_closest_table_srv service")
     return MoveObjectsOnClosestTable.srvResponse(True, "")
+    
+    
+def move_items_on_the_closest_table(monitor):  
+
+    closest_table_position, table_distance = get_closest_table_position_and_distance()    
+    
+#    self.objects_on_robot_tray #TODO check if needed to be put on global var 
+    set_position(closest_table_position.x - OFFSET, 
+                closest_table_position.y + OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                monitor.objects_on_robot_tray[0])
+
+    set_position(closest_table_position.x + OFFSET, 
+                closest_table_position.y - OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                monitor.objects_on_robot_tray[1])
+
+    set_position(closest_table_position.x + OFFSET, 
+                closest_table_position.y + OFFSET,
+                TABLE_CAFFE_HEIGHT, 
+                monitor.objects_on_robot_tray[2])
+    print("move_objects_on_the_closest_table_srv service")
+    return MoveObjectsOnClosestTable.srvResponse(True, "")    
     
 def get_three_ordered_items_srv(req):  
     #TODO
