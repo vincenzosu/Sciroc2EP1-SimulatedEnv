@@ -154,8 +154,8 @@ def talker(se1om):
         #ebws.door_handle_pub.publish(msg_handle)
 
         spawn_three_objs("beer", "beer", "beer")
-        move_items_on_the_tray(se1om)
-        move_items_on_the_closest_table(se1om)
+        move_items_on_the_tray()
+        move_items_on_the_closest_table()
         
         r.sleep()
 
@@ -167,7 +167,7 @@ def callback(data):
 
 def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
     global objects_on_robot_tray
-    counter_distance = get_robot_counter_distance(monitor)
+    counter_distance = get_robot_counter_distance()
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
  
@@ -399,7 +399,7 @@ def get_closest_table_position_and_distance(se1om): #OK
     return closest_table_position, min_distance
 
 
-def get_robot_counter_distance(se1om): #OK
+def get_robot_counter_distance(): #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates(se1om.counter_object, '')
