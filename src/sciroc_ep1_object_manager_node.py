@@ -104,9 +104,9 @@ def talker(se1om):
     msg = Float64()
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
 
-    spawn_three_objs("beer", "beer", "beer", se1om)
+    #spawn_three_objs("beer", "beer", "beer", se1om)
     #move_items_on_the_tray(se1om)
-    move_items_on_the_closest_table(se1om)
+    #move_items_on_the_closest_table(se1om)
     
         
     
@@ -128,6 +128,7 @@ def talker(se1om):
 
         spawn_three_objs("beer", "beer", "beer", se1om)
         move_items_on_the_tray(se1om)
+        move_items_on_the_closest_table(se1om)
         
         r.sleep()
 
