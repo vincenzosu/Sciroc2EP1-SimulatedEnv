@@ -311,7 +311,7 @@ def set_position(goal_x, goal_y,goal_z, object_to_move):
        set_state = rospy.ServiceProxy(
           '/gazebo/set_model_state', SetModelState)
        resp = set_state(state_msg)
-       print(state_msg)
+       #print(state_msg)
 
     except rospy.ServiceException, e:
        print "Service call failed: %s" % e
