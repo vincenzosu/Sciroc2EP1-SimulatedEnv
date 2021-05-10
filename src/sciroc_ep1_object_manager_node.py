@@ -28,7 +28,7 @@ from geometry_msgs.msg import Pose, Point, Quaternion
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 
 
-VERBOSE = True
+VERBOSE = False
 
 object_counter = 0
 
