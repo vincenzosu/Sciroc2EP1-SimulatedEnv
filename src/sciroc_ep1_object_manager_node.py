@@ -45,6 +45,29 @@ SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
 SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
 SPAWN_POSE_3 = Pose(position=Point(x=4.5, y=-1.4-OFFSET, z=COUNTER_H))
 
+list_of_tables = {   #set
+    "cafe_table", 
+    "cafe_table_0", 
+    "cafe_table_1", 
+    "cafe_table_2", 
+    "cafe_table_5",
+    "cafe_table_6"
+}
+
+available_objects = {
+    "beer",
+    "biscuit_box",
+    "bottle_beer"
+    "bottle_red_wine"
+}
+
+objects_on_robot_tray = (  #tuple
+    "none",
+    "none",
+    "none"
+)
+
+counter_object = "table"			
 
 class sciroc_ep1_object_manager:
     def __init__(self):
