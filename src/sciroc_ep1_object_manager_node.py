@@ -356,8 +356,8 @@ def get_robot_tray_position():
     print ("robot orientation")
     print (robot_orientation)
     return np.array(
-        [robot_pose[0] - OFFSET_TRAY*math.sin(robot_orientation), 
-        robot_pose[1] - OFFSET_TRAY*math.cos(robot_orientation),
+        [robot_pose[0] - OFFSET_TRAY*math.sin(3.14+robot_orientation), 
+        robot_pose[1] - OFFSET_TRAY*math.cos(3.14+robot_orientation),
         ROBOT_TRAY_HEIGHT]
     )
     
