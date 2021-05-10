@@ -104,9 +104,8 @@ def talker(se1om):
     msg = Float64()
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
 
-
     spawn_three_objs("beer", "beer", "beer", se1om)
-    move_items_on_the_tray(se1om)
+    #move_items_on_the_tray(se1om)
     move_items_on_the_closest_table(se1om)
     
         
@@ -314,7 +313,7 @@ def get_scene_object_list(req):
     return []
 
 
-def set_position(goal_x, goal_y,goal_z, object_to_move):
+def set_position(goal_x, goal_y, goal_z, object_to_move):
     state_msg = ModelState()
 
     state_msg.model_name = object_to_move
