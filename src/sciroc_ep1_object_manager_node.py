@@ -226,18 +226,18 @@ def move_items_on_the_closest_table(monitor):
     closest_table_position, table_distance = get_closest_table_position_and_distance(monitor)    
     
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
-    set_position(closest_table_position.x - OFFSET, 
-                closest_table_position.y + OFFSET,
+    set_position(closest_table_position[0] - OFFSET, 
+                closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
                 monitor.objects_on_robot_tray[0])
 
-    set_position(closest_table_position.x + OFFSET, 
-                closest_table_position.y - OFFSET,
+    set_position(closest_table_position[0] + OFFSET, 
+                closest_table_position[1] - OFFSET,
                 TABLE_CAFFE_HEIGHT, 
                 monitor.objects_on_robot_tray[1])
 
-    set_position(closest_table_position.x + OFFSET, 
-                closest_table_position.y + OFFSET,
+    set_position(closest_table_position[0] + OFFSET, 
+                closest_table_positionþ[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
                 monitor.objects_on_robot_tray[2])
     print("move_objects_on_the_closest_table_srv service")
