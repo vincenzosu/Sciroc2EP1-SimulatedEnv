@@ -153,7 +153,7 @@ def talker(se1om):
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
-        spawn_three_objs("beer", "beer", "beer", se1om)
+        spawn_three_objs("beer", "beer", "beer")
         move_items_on_the_tray(se1om)
         move_items_on_the_closest_table(se1om)
         
@@ -219,36 +219,36 @@ def move_items_on_the_closest_table():
     set_position(closest_table_position[0] - OFFSET, 
                 closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                monitor.objects_on_robot_tray[0])
+                objects_on_robot_tray[0])
 
     set_position(closest_table_position[0] + OFFSET, 
                 closest_table_position[1] - OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                monitor.objects_on_robot_tray[1])
+                objects_on_robot_tray[1])
 
     set_position(closest_table_position[0] + OFFSET, 
                 closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                monitor.objects_on_robot_tray[2])
+                objects_on_robot_tray[2])
 
     
 def get_three_ordered_items_srv(req):  
     #TODO
     # string1, string2, string3
-    
+    spawn_three_objs(req.obj1, req.obj2, req.obj3 )
     
     print("get_three_objects_srv service")
     return GetThreeOrderedItems.srvResponse(True, "")
     
-def spawn_three_objs(obj0, obj1, obj2, monitor):
+def spawn_three_objs(obj0, obj1, obj2):
     #TODO AGGINUGERE ERRORE 1 su 3
     global TABLE_BANK_POSE
     global OFFSET
-    global monitor
+    global objects_on_robot_tray
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
-    monitor.objects_on_robot_tray = (model0, model1, model2)
+    objects_on_robot_tray = (model0, model1, model2)
     print ("SPAWNED")
     print (objects_on_robot_tray)
     
