@@ -223,7 +223,7 @@ def move_items_on_the_closest_table_srv(req):
     
 def move_items_on_the_closest_table(monitor):  
 
-    closest_table_position, table_distance = get_closest_table_position_and_distance()    
+    closest_table_position, table_distance = get_closest_table_position_and_distance(monitor)    
     
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
     set_position(closest_table_position.x - OFFSET, 
