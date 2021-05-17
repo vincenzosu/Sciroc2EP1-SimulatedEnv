@@ -8,6 +8,7 @@ import os
 import sys
 import tf
 import numpy as np
+import random
 
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import Range
@@ -40,6 +41,8 @@ MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.2
 OFFSET_TRAY = 0.1
+OFFSET_OBJS_TRAY = 0.08
+RANDOMIZE_SPAWN = True
 
 SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
 SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
@@ -166,25 +169,25 @@ def callback(data):
 
 
 def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
-    global objects_on_robot_tray
+    global OFFSET_OBJS_TRAY, objects_on_robot_tray
     counter_distance = get_robot_counter_distance()
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
  
     tray_pose = get_robot_tray_position()
 #    self.objects_on_robot_tray #TODO check if needed to be put on global var 
-    set_position(tray_pose[0], 
-                tray_pose[1],
+    set_position(tray_pose[0]+OFFSET_OBJS_TRAY, 
+                tray_pose[1]+OFFSET_OBJS_TRAY,
                 tray_pose[2], 
                 objects_on_robot_tray[0])
 
-    set_position(tray_pose[0], 
-                tray_pose[1],
+    set_position(tray_pose[0]+OFFSET_OBJS_TRAY, 
+                tray_pose[1]-OFFSET_OBJS_TRAY,
                 tray_pose[2], 
                 objects_on_robot_tray[1])
 
-    set_position(tray_pose[0], 
-                tray_pose[1],
+    set_position(tray_pose[0]-OFFSET_OBJS_TRAY, 
+                tray_pose[1]+OFFSET_OBJS_TRAY,
                 tray_pose[2], 
                 objects_on_robot_tray[2])
 
@@ -241,15 +244,24 @@ def get_three_ordered_items_srv(req):
     return GetThreeOrderedItems.srvResponse(True, "")
     
 def spawn_three_objs(obj0, obj1, obj2):
-    #TODO AGGINUGERE ERRORE 1 su 3
-    global TABLE_BANK_POSE
-    global OFFSET
-    global objects_on_robot_tray
+    global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN
+        available_objects, objects_on_robot_tray
+    
+    if RANDOMIZE_SPAWN:
+        chosen = random.sample(available_objects, 1)
+        while chosen != obj0 and chosen != obj1 and chosen != obj2:
+            chosen = random.sample(available_objects, 1)
+        objs = [obj0, obj1, obj2]
+        print(objs)
+        random_index = random.randrange(len(objs))
+        objs[random_index] = chosen
+        print(objs)
+        obj0, obj1, obj2 = objs
+    
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
     objects_on_robot_tray = (model0, model1, model2)
-    print ("SPAWNED")
     print (objects_on_robot_tray)
     
 def change_the_item_srv(req):  
