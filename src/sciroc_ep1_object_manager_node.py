@@ -247,11 +247,11 @@ def spawn_three_objs(obj0, obj1, obj2):
     global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN, available_objects, objects_on_robot_tray
     
     if RANDOMIZE_SPAWN:
-        chosen = random.sample(available_objects, 1)
+        chosen = random.sample(available_objects, 1)[0]
         print(chosen)
         while chosen != obj0 and chosen != obj1 and chosen != obj2:
             #print("HERE")
-            chosen = random.sample(available_objects, 1)
+            chosen = random.sample(available_objects, 1)[0]
         objs = [obj0, obj1, obj2]
         print(objs)
         random_index = random.randrange(len(objs))
