@@ -413,9 +413,10 @@ def get_closest_table_position_and_distance(se1om): #OK
 
 
 def get_robot_counter_distance(): #OK
+    global counter_object
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
-        resp_coordinates = model_coordinates(se1om.counter_object, '')
+        resp_coordinates = model_coordinates(counter_object, '')
         counter_coords = np.array([
             resp_coordinates.pose.position.x,
             resp_coordinates.pose.position.y])
