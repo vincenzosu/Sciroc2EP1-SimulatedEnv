@@ -218,7 +218,7 @@ def move_items_on_the_closest_table_srv(req):
     
 def move_items_on_the_closest_table():  
     global objects_on_robot_tray
-    closest_table_position, table_distance = get_closest_table_position_and_distance(monitor)    
+    closest_table_position, table_distance = get_closest_table_position_and_distance()    
     set_position(closest_table_position[0] - OFFSET, 
                 closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
@@ -390,10 +390,11 @@ def get_robot_tray_position():
     
 
 
-def get_closest_table_position_and_distance(se1om): #OK
+def get_closest_table_position_and_distance(): #OK
+    global list_of_tables
     min_distance = 1000000
     closest_table_position = np.array([0,0])
-    for table in se1om.list_of_tables:
+    for table in list_of_tables:
         try:
             model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
             resp_coordinates = model_coordinates(table, '')
