@@ -244,7 +244,7 @@ def get_three_ordered_items_srv(req):
     return GetThreeOrderedItems.srvResponse(True, "")
     
 def spawn_three_objs(obj0, obj1, obj2):
-    global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN
+    global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN,
         available_objects, objects_on_robot_tray
     
     if RANDOMIZE_SPAWN:
