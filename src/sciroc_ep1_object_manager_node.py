@@ -250,7 +250,7 @@ def spawn_three_objs(obj0, obj1, obj2):
         chosen = random.sample(available_objects, 1)
         print(chosen)
         while chosen != obj0 and chosen != obj1 and chosen != obj2:
-            print("HERE")
+            #print("HERE")
             chosen = random.sample(available_objects, 1)
         objs = [obj0, obj1, obj2]
         print(objs)
