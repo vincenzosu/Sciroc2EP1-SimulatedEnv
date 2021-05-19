@@ -30,16 +30,17 @@ VERBOSE = False
 
 object_counter = 0
 
-ROBOT_TRAY_HEIGHT = 1.5             #TODO
-TABLE_CAFFE_HEIGHT = 1.2              #TODO
-COUNTER_H = 1.3                     #TODO
+ROBOT_TRAY_HEIGHT = 1.5             
+TABLE_CAFFE_HEIGHT = 1.2            
+COUNTER_H = 1.3                     
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
-MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
+MIN_DIST_TO_MOVE_OBJS = 1.5         
 # distance of objects from the center of the table 
 OFFSET = 0.3
 OFFSET_TRAY = 0.15
 OFFSET_OBJS_TRAY = 0.05
-RANDOMIZE_SPAWN = False
+RANDOMIZE_SPAWN = True
+CHECK_DISTANCES = False
 
 SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
 SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
@@ -192,21 +193,23 @@ def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
 
 
 def move_items_on_the_tray_srv(req):  
-    print("move_objects_on_the_tray_srv service")
+    global CHECK_DISTANCES, MIN_DIST_TO_MOVE_OBJS
     
-    counter_distance = get_robot_counter_distance()
-    if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnTheTrayResponse(False, "Robot too far from the counter to move items")
+    if CHECK_DISTANCES:
+        counter_distance = get_robot_counter_distance()
+        if counter_distance > MIN_DIST_TO_MOVE_OBJS:
+            return MoveItemsOnTheTrayResponse(False, "Robot too far from the counter to move items")
  
     move_items_on_the_tray()
 
     return MoveItemsOnTheTrayResponse(True, "Items moved")
 
 def move_items_on_the_closest_table_srv(req):  
-    #TODO
+    global CHECK_DISTANCES, MIN_DIST_TO_MOVE_OBJS
     closest_table_position, table_distance = get_closest_table_position_and_distance()
-    if table_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveObjectsOnClosestTableResponse(False, "Robot too far from the table to move items")
+    if CHECK_DISTANCES:
+        if table_distance > MIN_DIST_TO_MOVE_OBJS:
+            return MoveObjectsOnClosestTableResponse(False, "Robot too far from the table to move items")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
@@ -249,7 +252,6 @@ def spawn_three_objs(obj0, obj1, obj2):
         chosen = random.sample(available_objects, 1)[0]
         print(chosen)
         while chosen != obj0 and chosen != obj1 and chosen != obj2:
-            #print("HERE")
             chosen = random.sample(available_objects, 1)[0]
         objs = [obj0, obj1, obj2]
         print(objs)
