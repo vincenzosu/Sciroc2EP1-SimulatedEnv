@@ -42,7 +42,7 @@ MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
 OFFSET = 0.2
 OFFSET_TRAY = 0.1
 OFFSET_OBJS_TRAY = 0.08
-RANDOMIZE_SPAWN = True
+RANDOMIZE_SPAWN = False
 
 SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
 SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
