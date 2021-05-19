@@ -199,11 +199,11 @@ def move_items_on_the_tray_srv(req):
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnClosestTable.srvResponse(False, "")
+        return #MoveItemsOnClosestTable.srvResponse(False, "")
  
     move_items_on_the_tray()
 
-    return MoveItemsOnTheTray.srvResponse(True, "")
+    #return MoveItemsOnTheTray.srvResponse(True, "")
 
 def move_items_on_the_closest_table_srv(req):  
     #TODO
