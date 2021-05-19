@@ -38,7 +38,7 @@ MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
 # distance of objects from the center of the table 
 OFFSET = 0.3
 OFFSET_TRAY = 0.15
-OFFSET_OBJS_TRAY = 0.08
+OFFSET_OBJS_TRAY = 0.05
 RANDOMIZE_SPAWN = False
 
 SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
@@ -196,21 +196,21 @@ def move_items_on_the_tray_srv(req):
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnClosestTableResponse(False, "Robot too far from the counter to move items")
+        return MoveItemsOnTheTrayResponse(False, "Robot too far from the counter to move items")
  
     move_items_on_the_tray()
 
-    return MoveItemsOnClosestTableResponse(True, "Items moved")
+    return MoveItemsOnTheTrayResponse(True, "Items moved")
 
 def move_items_on_the_closest_table_srv(req):  
     #TODO
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if table_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnTheTray.srvResponse(False, "Robot too far from the table to move items")
+        return MoveObjectsOnClosestTableResponse(False, "Robot too far from the table to move items")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
-    return MoveObjectsOnClosestTable.srvResponse(True, "Items moved")
+    return MoveObjectsOnClosestTableResponse(True, "Items moved")
 
     
     
