@@ -3,4 +3,5 @@ string item2
 string item3
 ---
 #response
-int8 RESULT=-1
+bool success
+string message

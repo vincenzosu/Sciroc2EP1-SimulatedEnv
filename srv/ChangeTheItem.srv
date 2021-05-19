@@ -1,1 +1,6 @@
 string name_of_the_object_to_change
+
+---
+#response
+bool success
+string message

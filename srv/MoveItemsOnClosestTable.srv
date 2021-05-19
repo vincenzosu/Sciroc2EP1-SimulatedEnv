@@ -1,4 +1,5 @@
 
 ---
 #response
-int8 RESULT=-1
+bool success
+string message

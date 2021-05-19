@@ -200,23 +200,22 @@ def move_items_on_the_tray_srv(req):
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnClosestTableResponse(False, "-1")
+        return MoveItemsOnClosestTableResponse(False, "Too far from the counter")
  
     move_items_on_the_tray()
 
-    return MoveItemsOnClosestTableResponse(True, "0")
+    return MoveItemsOnClosestTableResponse(True, "")
 
 def move_items_on_the_closest_table_srv(req):  
     #TODO
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if table_distance > MIN_DIST_TO_MOVE_OBJS:
-#        return MoveItemsOnTheTray.srvResponse(False, "")
-        return -1
+        return MoveItemsOnTheTray.srvResponse(False, "")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
-#    return MoveObjectsOnClosestTable.srvResponse(True, "")
-    return 0
+    return MoveObjectsOnClosestTable.srvResponse(True, "")
+
     
     
 def move_items_on_the_closest_table():  
@@ -244,7 +243,7 @@ def get_three_ordered_items_srv(req):
     spawn_three_objs(req.item1, req.item2, req.item3 )
     
     print("get_three_objects_srv service")
-    return GetThreeOrderedItemsResponse(True, "-1") 
+    return GetThreeOrderedItemsResponse(True, "") 
 
     
 def spawn_three_objs(obj0, obj1, obj2):
