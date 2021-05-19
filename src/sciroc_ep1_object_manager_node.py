@@ -15,10 +15,11 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-from sciroc_ep1_object_manager.srv import MoveItemsOnTheTray
-from sciroc_ep1_object_manager.srv import MoveItemsOnClosestTable
-from sciroc_ep1_object_manager.srv import GetThreeOrderedItems
-from sciroc_ep1_object_manager.srv import ChangeTheItem
+#from sciroc_ep1_object_manager.srv import MoveItemsOnTheTray
+from sciroc_ep1_object_manager.srv import *
+#from sciroc_ep1_object_manager.srv import MoveItemsOnClosestTable
+#from sciroc_ep1_object_manager.srv import GetThreeOrderedItems
+#from sciroc_ep1_object_manager.srv import ChangeTheItem
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
@@ -199,11 +200,11 @@ def move_items_on_the_tray_srv(req):
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return #MoveItemsOnClosestTable.srvResponse(False, "")
+        return MoveItemsOnClosestTableResponse(False, "-1")
  
     move_items_on_the_tray()
 
-    #return MoveItemsOnTheTray.srvResponse(True, "")
+    return MoveItemsOnClosestTableResponse(True, "0")
 
 def move_items_on_the_closest_table_srv(req):  
     #TODO
@@ -243,8 +244,8 @@ def get_three_ordered_items_srv(req):
     spawn_three_objs(req.item1, req.item2, req.item3 )
     
     print("get_three_objects_srv service")
-    #return GetThreeOrderedItems.srvResponse(True, "") 
-    return [0]
+    return GetThreeOrderedItemsResponse(True, "-1") 
+
     
 def spawn_three_objs(obj0, obj1, obj2):
     global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN, available_objects, objects_on_robot_tray
