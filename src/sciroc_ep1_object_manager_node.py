@@ -152,13 +152,13 @@ def talker(se1om):
         #print(get_closest_table_position_and_distance(se1om))
         #get_robot_tray_position()
         
-        print("BEER SPAWNED")
+    #    print("BEER SPAWNED")
         #msg_handle = getTrolleyPosition()
         #ebws.door_handle_pub.publish(msg_handle)
 
-        spawn_three_objs("beer", "beer", "beer")
-        move_items_on_the_tray()
-        move_items_on_the_closest_table()
+    #    spawn_three_objs("beer", "beer", "beer")
+    #    move_items_on_the_tray()
+    #    move_items_on_the_closest_table()
         
         r.sleep()
 
@@ -238,7 +238,7 @@ def move_items_on_the_closest_table():
 def get_three_ordered_items_srv(req):  
     #TODO
     # string1, string2, string3
-    spawn_three_objs(req.obj1, req.obj2, req.obj3 )
+    spawn_three_objs(req.item1, req.item2, req.item3 )
     
     print("get_three_objects_srv service")
     return GetThreeOrderedItems.srvResponse(True, "")
