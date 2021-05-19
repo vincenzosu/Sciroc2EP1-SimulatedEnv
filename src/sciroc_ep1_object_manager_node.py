@@ -15,11 +15,7 @@ from sensor_msgs.msg import Range
 from geometry_msgs.msg import Twist
 from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
-#from sciroc_ep1_object_manager.srv import MoveItemsOnTheTray
 from sciroc_ep1_object_manager.srv import *
-#from sciroc_ep1_object_manager.srv import MoveItemsOnClosestTable
-#from sciroc_ep1_object_manager.srv import GetThreeOrderedItems
-#from sciroc_ep1_object_manager.srv import ChangeTheItem
 from gazebo_msgs.srv import GetModelState
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
@@ -40,8 +36,8 @@ COUNTER_H = 1.3                     #TODO
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS = 1.5         #TODO
 # distance of objects from the center of the table 
-OFFSET = 0.2
-OFFSET_TRAY = 0.1
+OFFSET = 0.3
+OFFSET_TRAY = 0.15
 OFFSET_OBJS_TRAY = 0.08
 RANDOMIZE_SPAWN = False
 
@@ -200,21 +196,21 @@ def move_items_on_the_tray_srv(req):
     
     counter_distance = get_robot_counter_distance()
     if counter_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnClosestTableResponse(False, "Too far from the counter")
+        return MoveItemsOnClosestTableResponse(False, "Robot too far from the counter to move items")
  
     move_items_on_the_tray()
 
-    return MoveItemsOnClosestTableResponse(True, "")
+    return MoveItemsOnClosestTableResponse(True, "Items moved")
 
 def move_items_on_the_closest_table_srv(req):  
     #TODO
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if table_distance > MIN_DIST_TO_MOVE_OBJS:
-        return MoveItemsOnTheTray.srvResponse(False, "")
+        return MoveItemsOnTheTray.srvResponse(False, "Robot too far from the table to move items")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
-    return MoveObjectsOnClosestTable.srvResponse(True, "")
+    return MoveObjectsOnClosestTable.srvResponse(True, "Items moved")
 
     
     
