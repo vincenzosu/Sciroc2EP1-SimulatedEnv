@@ -31,7 +31,7 @@ VERBOSE = False
 object_counter = 0
 
 ROBOT_TRAY_HEIGHT = 1.5             
-TABLE_CAFFE_HEIGHT = 1.2            
+TABLE_CAFFE_HEIGHT = 1.1            
 COUNTER_H = 1.3                     
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS = 1.5         
@@ -306,13 +306,6 @@ def load_and_spawn_gazebo_models(obj_name, pose):
     current_model = object_name+str(object_counter)
     model_list.append(current_model)
     object_counter+= 1
-    # Spawn Trays Table
-    #trays_table_name = "trays_table"
-    #trays_table_path = sorting_demo_models_path + "table/model.sdf"
-    #trays_table_pose = Pose(position=Point(x=0.0, y=0.95, z=0.0))
-
-    #spawn_sdf_model(trays_table_name, trays_table_path, trays_table_pose, world_reference_frame)
-    #model_list.append(trays_table_name)
     return model_list, current_model
     
 def is_there_an_object_on(x,y,z):
@@ -481,19 +474,6 @@ def getHandlePosition():
     
     
 
-#def getScene(benchmark_name):
-#    scene_map = {
-#        "No Force": noforce,
-#        "Constant Force": constant_force,
-#        "Sudden Force": sudden_force,
-#        "Sudden Ramp": sudden_ramp,
-#        "Wind Ramp": wind_ramp,
- #   }
-#    func = scene_map.get(benchmark_name)
-#    arg1, arg2 = func()
-#    return arg1, arg2
-    
-
 
 def main(args):
      se1om =  sciroc_ep1_object_manager()
@@ -501,13 +481,15 @@ def main(args):
      
      listener(se1om)
 
-     #s = rospy.Service('/beast/trolley/set_stiffness', SetStiffness, handle_beast_trolley_dummy_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_items_on_the_tray', MoveItemsOnTheTray, move_items_on_the_tray_srv) 
-     s = rospy.Service('/sciroc_object_manager/move_items_on_the_closest_table', MoveItemsOnClosestTable, move_items_on_the_closest_table_srv) 
-     s = rospy.Service('/sciroc_object_manager/get_three_ordered_items', GetThreeOrderedItems, get_three_ordered_items_srv) 
-     s = rospy.Service('/sciroc_object_manager/change_the_item', ChangeTheItem, change_the_item_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_items_on_the_tray', 
+     MoveItemsOnTheTray, move_items_on_the_tray_srv) 
+     s = rospy.Service('/sciroc_object_manager/move_items_on_the_closest_table', 
+     MoveItemsOnClosestTable, move_items_on_the_closest_table_srv) 
+     s = rospy.Service('/sciroc_object_manager/get_three_ordered_items', 
+     GetThreeOrderedItems, get_three_ordered_items_srv) 
+     s = rospy.Service('/sciroc_object_manager/change_the_item', 
+     ChangeTheItem, change_the_item_srv) 
      
-     #print ("service reset_tray and move_objects_on_the_closest_table in sciroc_ep1_object_manager_node")    
 
      try:
          talker(se1om)
