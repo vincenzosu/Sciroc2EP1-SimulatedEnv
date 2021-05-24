@@ -11,9 +11,8 @@ import numpy as np
 import random
 
 from sensor_msgs.msg import Image
-from sensor_msgs.msg import Range
+from geometry_msgs.msg import Pose, Point, Quaternion
 from geometry_msgs.msg import Twist
-from urdf_parser_py.urdf import URDF
 from std_msgs.msg import Float64
 from sciroc_ep1_object_manager.srv import *
 from gazebo_msgs.srv import GetModelState
@@ -21,8 +20,6 @@ from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState
 from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
-
-from geometry_msgs.msg import Pose, Point, Quaternion
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 
 
@@ -42,9 +39,11 @@ OFFSET_OBJS_TRAY = 0.05
 RANDOMIZE_SPAWN = True
 CHECK_DISTANCES = False
 
-SPAWN_POSE_1 = Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H))
-SPAWN_POSE_2 = Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H))
-SPAWN_POSE_3 = Pose(position=Point(x=4.5, y=-1.4-OFFSET, z=COUNTER_H))
+SPAWN_POSES = (
+    Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H)),
+    Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H)),
+    Pose(position=Point(x=4.5, y=-1.4-OFFSET, z=COUNTER_H))
+)
 
 list_of_tables = {   #set
     "cafe_table", 
@@ -89,14 +88,7 @@ class sciroc_ep1_object_manager:
             "cafe_table_5",
             "cafe_table_6"
         }
-        
-        self.objects_on_robot_tray = (  #tuple
-            "none",
-            "none",
-            "none"
-        )
-
-        self.counter_object = "table"			
+        	
 
           
     def startSim(self):
@@ -166,8 +158,9 @@ def callback(data):
     print ("initialized")
 
 
-def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
-    global OFFSET_OBJS_TRAY, objects_on_robot_tray
+def move_items_on_the_tray() -> None :   
+    global OFFSET_OBJS_TRAY
+    objs_on_robot_tray = get_objects_on_robot_tray()
     counter_distance = get_robot_counter_distance()
     #if counter_distance > MIN_DIST_TO_MOVE_OBJS:
     #    return 
@@ -177,17 +170,17 @@ def move_items_on_the_tray():   #TO REMOVE!!!!!!!!!
     set_position(tray_pose[0]+OFFSET_OBJS_TRAY, 
                 tray_pose[1]+OFFSET_OBJS_TRAY,
                 tray_pose[2], 
-                objects_on_robot_tray[0])
+                objs_on_robot_tray[0])
 
     set_position(tray_pose[0]+OFFSET_OBJS_TRAY, 
                 tray_pose[1]-OFFSET_OBJS_TRAY,
                 tray_pose[2], 
-                objects_on_robot_tray[1])
+                objs_on_robot_tray[1])
 
     set_position(tray_pose[0]-OFFSET_OBJS_TRAY, 
                 tray_pose[1]+OFFSET_OBJS_TRAY,
                 tray_pose[2], 
-                objects_on_robot_tray[2])
+                objs_on_robot_tray[2])
 
 
 
@@ -218,41 +211,54 @@ def move_items_on_the_closest_table_srv(req):
     
     
 def move_items_on_the_closest_table():  
-    global objects_on_robot_tray
+    objs_on_robot_tray = get_objects_on_robot_tray()
     closest_table_position, table_distance = get_closest_table_position_and_distance()    
     set_position(closest_table_position[0] - OFFSET, 
                 closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                objects_on_robot_tray[0])
+                objs_on_robot_tray[0])
 
     set_position(closest_table_position[0] + OFFSET, 
                 closest_table_position[1] - OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                objects_on_robot_tray[1])
+                objs_on_robot_tray[1])
 
     set_position(closest_table_position[0] + OFFSET, 
                 closest_table_position[1] + OFFSET,
                 TABLE_CAFFE_HEIGHT, 
-                objects_on_robot_tray[2])
+                objs_on_robot_tray[2])
 
     
 def get_three_ordered_items_srv(req):  
-    #TODO
-    # string1, string2, string3
-    spawn_three_objs(req.item1, req.item2, req.item3 )
+    available_objs = get_available_objects()
+
+    if req.item0 not in available_objs:
+        return ChangeTheItem.srvResponse(False, 
+        "First requested object is not valid object")        
+
+    if req.item1 not in available_objs:
+        return ChangeTheItem.srvResponse(False, 
+        "Second requested object is not valid object")    
+        
+    if req.item2 not in available_objs:
+        return ChangeTheItem.srvResponse(False, 
+        "Third requested object is not valid object")    
+    
+    spawn_three_objs(req.item0, req.item1, req.item2)
     
     print("get_three_objects_srv service")
     return GetThreeOrderedItemsResponse(True, "") 
 
     
-def spawn_three_objs(obj0, obj1, obj2):
-    global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN, available_objects, objects_on_robot_tray
+def spawn_three_objs(obj0, obj1, obj2) -> None:
+    global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN, objects_on_robot_tray
+    available_objs = get_available_objects()
     
     if RANDOMIZE_SPAWN:
-        chosen = random.sample(available_objects, 1)[0]
+        chosen = random.sample(available_objs, 1)[0]
         print(chosen)
         while chosen != obj0 and chosen != obj1 and chosen != obj2:
-            chosen = random.sample(available_objects, 1)[0]
+            chosen = random.sample(available_objs, 1)[0]
         objs = [obj0, obj1, obj2]
         print(objs)
         random_index = random.randrange(len(objs))
@@ -260,20 +266,46 @@ def spawn_three_objs(obj0, obj1, obj2):
         print(objs)
         obj0, obj1, obj2 = objs
     
-    modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSE_1)   
-    modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSE_2)   
-    modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSE_3)   
+    modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[0])   
+    modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSES[1])   
+    modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSES[2])   
     objects_on_robot_tray = (model0, model1, model2)
     print (objects_on_robot_tray)
     
-def change_the_item_srv(req):  
-    #TODO cambiare modelli di objects_on_robot_tray
-    req.name_of_the_object_to_change
-    print("change_the_objects_srv service")
-    return ChangeTheItem.srvResponse(True, "")
     
+def change_the_item_srv(req):  
+    objs_on_tray = get_objects_on_robot_tray()
+    available_objs = get_available_objects()
+    
+    if req.name_of_the_object_to_spawn not in objs_on_tray:
+        return ChangeTheItem.srvResponse(False, 
+        "Requested object is not on the robot's tray")    
+    
+    if req.name_of_the_object_to_spawn not in available_objs:
+        return ChangeTheItem.srvResponse(False, 
+        "Requested object is not valid object")    
+        
+    old_model_id = get_model_tray_id(req.name_of_the_object_to_change)
+    if old_model_id == None:
+        return ChangeTheItem.srvResponse(False, 
+        "Requestd object is not on the robot's tray")    
+
+    delete_model(old_model_id)
+    position_of_old_item = objs_on_tray.index(old_model_id)
+    modlist, new_model = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[position_of_old_item])   
+    
+    if change_object_on_robot_tray_list(old_model_id, new_model)
+        return ChangeTheItem.srvResponse(True, "")
+    return False
   
-def spawn_sdf(name, description_xml, pose, reference_frame):
+  
+def delete_model(modelName) -> None:
+    """ Remove the model with 'modelName' from the Gazebo scene """
+    del_model_prox = rospy.ServiceProxy('gazebo/delete_model', DeleteModel) # Handle to model spawner
+    rospy.wait_for_service('gazebo/delete_model') # Wait for the model loader to be ready 
+    del_model_prox(modelName) # Remove from Gazebo
+  
+def spawn_sdf(name, description_xml, pose, reference_frame) -> None:
     rospy.wait_for_service('/gazebo/spawn_sdf_model')
     try:
         spawn_sdf = rospy.ServiceProxy('/gazebo/spawn_sdf_model', SpawnModel)
@@ -281,7 +313,7 @@ def spawn_sdf(name, description_xml, pose, reference_frame):
     except rospy.ServiceException as e:
         rospy.logerr("Spawn SDF service call failed: {0}".format(e)) 
   
-def spawn_sdf_model(name, path, pose, reference_frame):
+def spawn_sdf_model(name, path, pose, reference_frame) -> None:
     # Load Model SDF
     description_xml = ''
     with open(path, "r") as model_file:
@@ -311,9 +343,25 @@ def load_and_spawn_gazebo_models(obj_name, pose):
 def is_there_an_object_on(x,y,z):
     return False
 
-def get_scene_object_list(req):
-    return []
+def get_available_objects() -> list:
+    global available_objects
+    return available_objects
 
+def get_objects_on_robot_tray() -> list:
+    global objects_on_robot_tray
+    return objects_on_robot_tray
+
+def set_objects_on_robot_tray(model0, model1, model2) -> None:  
+    global objects_on_robot_tray
+    objects_on_robot_tray = (model0, model1, model2)
+    
+def change_object_on_robot_tray_list(old, new) -> bool:  
+    global objects_on_robot_tray
+    for n, curr_item_with_id in enumerate(objects_on_robot_tray):
+        if old in curr_item_with_id: 
+            objects_on_robot_tray[n] = new
+            return True
+    return False
 
 def set_position(goal_x, goal_y, goal_z, object_to_move):
     state_msg = ModelState()
@@ -337,7 +385,7 @@ def set_position(goal_x, goal_y, goal_z, object_to_move):
     except rospy.ServiceException, e:
        print "Service call failed: %s" % e
 
-def get_robot_position():           #OK
+def get_robot_position() -> np.array:           #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -350,7 +398,7 @@ def get_robot_position():           #OK
         print("robot pose " + str(resp_coordinates.pose.position.y))
     return np.array([resp_coordinates.pose.position.x, resp_coordinates.pose.position.y])
     
-def get_robot_orientation():        #OK
+def get_robot_orientation() -> float :        #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -395,7 +443,6 @@ def get_closest_table_position_and_distance(): #OK
             curr_table_coords = np.array([
                 resp_coordinates.pose.position.x,
                 resp_coordinates.pose.position.y])
-#            curr_min_dist = (get_robot_position() - curr_table_coords).norm()
             curr_min_dist = np.linalg.norm(get_robot_position() - curr_table_coords)
             if curr_min_dist  < min_distance:
                 closest_table_position = curr_table_coords
@@ -415,64 +462,16 @@ def get_robot_counter_distance(): #OK
         counter_coords = np.array([
             resp_coordinates.pose.position.x,
             resp_coordinates.pose.position.y])
-#            curr_min_dist = (get_robot_position() - curr_table_coords).norm()
         dist = np.linalg.norm(get_robot_position() - counter_coords)
-        
     except rospy.ServiceException, e:
         print "ServiceProxy failed: %s"%e
         #exit(0)
-    
     return dist
 
 
 
 def listener(self):
-#    rospy.init_node('eurobench_worldstate_provider', anonymous=True)
     image_camera = rospy.Subscriber("sensor_msgs/Image", Image, callback)
-    
-
-def getTrolleyPosition(): 
-    try:
-        get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    model_prop = get_model_properties("door_simple")
-    try:
-        get_door_joint_props = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    if VERBOSE: print('---------- door aperture ---------')
-    joint_prop = get_door_joint_props('joint_frame_door')
-    if VERBOSE: print(joint_prop.position[0])
-   
-    return joint_prop.position[0]
-
-
-def getHandlePosition():
-    try:
-        get_model_properties = rospy.ServiceProxy('/gazebo/get_model_properties', GetModelProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    model_prop = get_model_properties("pushcart")
-    try:
-        get_door_joint_props = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
-    except rospy.ServiceException, e:
-        print "ServiceProxy failed: %s"%e
-        exit(0)
-    joint_prop_handle = get_door_joint_props('joint_door_lever')
-    if VERBOSE: 
-        print('---------- handle position ---------')
-    if VERBOSE: 
-        print(joint_prop_handle.position[0])
-        
-    getTrolleyPosition()
-        
-    return joint_prop_handle.position[0]
-    
-    
 
 
 def main(args):
