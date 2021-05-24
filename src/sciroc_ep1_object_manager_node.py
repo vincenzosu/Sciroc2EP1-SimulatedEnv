@@ -135,7 +135,7 @@ def callback(data):
     print ("initialized")
 
 
-def move_items_on_the_tray() -> None:   
+def move_items_on_the_tray():   
     global OFFSET_OBJS_TRAY
     objs_on_robot_tray = get_objects_on_robot_tray()
     counter_distance = get_robot_counter_distance()
