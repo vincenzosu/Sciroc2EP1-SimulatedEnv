@@ -230,7 +230,7 @@ def get_three_ordered_items_srv(req):
     return GetThreeOrderedItemsResponse(True, "") 
 
     
-def spawn_three_objs(obj0, obj1, obj2) -> None:
+def spawn_three_objs(obj0, obj1, obj2) :
     global TABLE_BANK_POSE, OFFSET, RANDOMIZE_SPAWN, objects_on_robot_tray
     available_objs = get_available_objects()
     
@@ -279,13 +279,13 @@ def change_the_item_srv(req):
     return False
   
   
-def delete_model(modelName) -> None:
+def delete_model(modelName):
     """ Remove the model with 'modelName' from the Gazebo scene """
     del_model_prox = rospy.ServiceProxy('gazebo/delete_model', DeleteModel) # Handle to model spawner
     rospy.wait_for_service('gazebo/delete_model') # Wait for the model loader to be ready 
     del_model_prox(modelName) # Remove from Gazebo
   
-def spawn_sdf(name, description_xml, pose, reference_frame) -> None:
+def spawn_sdf(name, description_xml, pose, reference_frame):
     rospy.wait_for_service('/gazebo/spawn_sdf_model')
     try:
         spawn_sdf = rospy.ServiceProxy('/gazebo/spawn_sdf_model', SpawnModel)
@@ -293,7 +293,7 @@ def spawn_sdf(name, description_xml, pose, reference_frame) -> None:
     except rospy.ServiceException as e:
         rospy.logerr("Spawn SDF service call failed: {0}".format(e)) 
   
-def spawn_sdf_model(name, path, pose, reference_frame) -> None:
+def spawn_sdf_model(name, path, pose, reference_frame) :
     # Load Model SDF
     description_xml = ''
     with open(path, "r") as model_file:
@@ -323,19 +323,19 @@ def load_and_spawn_gazebo_models(obj_name, pose):
 def is_there_an_object_on(x,y,z):
     return False
 
-def get_available_objects() -> list:
+def get_available_objects() :
     global available_objects
     return available_objects
 
-def get_objects_on_robot_tray() -> list:
+def get_objects_on_robot_tray() :
     global objects_on_robot_tray
     return objects_on_robot_tray
 
-def set_objects_on_robot_tray(model0, model1, model2) -> None:  
+def set_objects_on_robot_tray(model0, model1, model2) :  
     global objects_on_robot_tray
     objects_on_robot_tray = (model0, model1, model2)
     
-def change_object_on_robot_tray_list(old, new) -> bool:  
+def change_object_on_robot_tray_list(old, new) :  
     global objects_on_robot_tray
     for n, curr_item_with_id in enumerate(objects_on_robot_tray):
         if old in curr_item_with_id: 
@@ -365,7 +365,7 @@ def set_position(goal_x, goal_y, goal_z, object_to_move):
     except rospy.ServiceException, e:
        print "Service call failed: %s" % e
 
-def get_robot_position() -> np.array:           #OK
+def get_robot_position() :           #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
@@ -378,7 +378,7 @@ def get_robot_position() -> np.array:           #OK
         print("robot pose " + str(resp_coordinates.pose.position.y))
     return np.array([resp_coordinates.pose.position.x, resp_coordinates.pose.position.y])
     
-def get_robot_orientation() -> float :        #OK
+def get_robot_orientation() :        #OK
     try:
         model_coordinates = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         resp_coordinates = model_coordinates('tiago', '')
