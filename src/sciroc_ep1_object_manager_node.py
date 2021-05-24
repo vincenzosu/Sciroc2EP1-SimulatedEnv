@@ -22,6 +22,7 @@ from gazebo_msgs.srv import GetModelProperties
 from gazebo_msgs.srv import GetJointProperties
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 
+import argparse
 import dataclasses
 from typing import Any, Dict, List, Tuple
 
