@@ -274,7 +274,7 @@ def change_the_item_srv(req):
     position_of_old_item = objs_on_tray.index(old_model_id)
     modlist, new_model = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[position_of_old_item])   
     
-    if change_object_on_robot_tray_list(old_model_id, new_model)
+    if change_object_on_robot_tray_list(old_model_id, new_model):
         return ChangeTheItem.srvResponse(True, "")
     return False
   
