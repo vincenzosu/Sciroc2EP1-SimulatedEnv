@@ -90,28 +90,6 @@ class sciroc_ep1_object_manager:
         }
         	
 
-          
-    def startSim(self):
-        package = 'eurobench_reemc_cart'
-        launch_file = 'reemc_cart.launch'
-        
-        uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
-        roslaunch.configure_logging(uuid)
-        
-        launch_file = os.path.join(rospkg.RosPack().get_path(package), 'launch', launch_file)
-     #   sys.argv = [ 'door:=simple', 'direction:=push', 'robot_placement_cw:=true']
-        
-        self.launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_file])
-        self.launch.start()
-
- 
-    def cw_left_callback(self, ros_data):
-        self.publish_strips(self.cw_left, ros_data, self.cw_left_pub)
-
-    def cw_right_callback(self, ros_data):
-        self.publish_strips(self.cw_right, ros_data, self.cw_right_pub)
-                
-
     
 
 
@@ -202,7 +180,8 @@ def move_items_on_the_closest_table_srv(req):
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if CHECK_DISTANCES:
         if table_distance > MIN_DIST_TO_MOVE_OBJS:
-            return MoveObjectsOnClosestTableResponse(False, "Robot too far from the table to move items")
+            return MoveObjectsOnClosestTableResponse(False, 
+            "Robot too far from the table to move items")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
