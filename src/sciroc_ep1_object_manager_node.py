@@ -162,7 +162,6 @@ def move_items_on_the_tray() -> None :
 
 
 
-
 def move_items_on_the_tray_srv(req):  
     global CHECK_DISTANCES, MIN_DIST_TO_MOVE_OBJS
     
