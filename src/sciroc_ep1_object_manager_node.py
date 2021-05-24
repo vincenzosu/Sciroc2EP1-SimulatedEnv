@@ -31,10 +31,9 @@ ROBOT_TRAY_HEIGHT = 1.5
 TABLE_CAFFE_HEIGHT = 1.1            
 COUNTER_H = 1.3                     
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
-MIN_DIST_TO_MOVE_OBJS = 1.5         
-# distance of objects from the center of the table 
-OFFSET = 0.3
-OFFSET_TRAY = 0.15
+MIN_DIST_TO_MOVE_OBJS = 1.5 # min distance to active the moving services [m]
+OFFSET = 0.3                # distance of objects from the center of the table [m]
+OFFSET_TRAY = 0.11          # distance of the tray from the center of the robot [m] 
 OFFSET_OBJS_TRAY = 0.05
 RANDOMIZE_SPAWN = True
 CHECK_DISTANCES = False
@@ -179,12 +178,12 @@ def move_items_on_the_closest_table_srv(req):
     closest_table_position, table_distance = get_closest_table_position_and_distance()
     if CHECK_DISTANCES:
         if table_distance > MIN_DIST_TO_MOVE_OBJS:
-            return MoveObjectsOnClosestTableResponse(False, 
+            return MoveItemsOnClosestTableResponse(False, 
             "Robot too far from the table to move items")
     
     move_items_on_the_closest_table()
     print("move_objects_on_the_closest_table_srv service")
-    return MoveObjectsOnClosestTableResponse(True, "Items moved")
+    return MoveItemsOnClosestTableResponse(True, "Items moved")
 
     
     
