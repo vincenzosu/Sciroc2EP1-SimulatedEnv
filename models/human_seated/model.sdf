@@ -24,7 +24,7 @@
         </geometry>
         <material>
             <script>
-              <uri>model://human_seated/model/CMan0317_HD2_O01P01_STD.tga</uri>
+              <uri>model://human_seated/model/</uri>
               <name>Custom/human_seated</name>
             </script>
           </material>
