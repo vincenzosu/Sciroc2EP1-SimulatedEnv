@@ -24,7 +24,8 @@
         </geometry>
         <material>
             <script>
-              <uri>model://human_seated_woman/model/</uri>
+              <uri>model://human_seated_woman/model/scripts/</uri>
+              <uri>model://human_seated_woman/model/textures/</uri>
               <name>Custom/human_seated_woman</name>
             </script>
           </material>
