@@ -18,17 +18,16 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/tiago_public_ws/src/Sciroc2EP1-SimulatedEnv/model_human_remove/88/model.dae</uri>
+            <uri>model://human_seated/model/model.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
         <material>
-          <lighting>1</lighting>
-          <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            <name>Gazebo/Grey</name>
-          </script>
-        </material>
+            <script>
+              <uri>model://human_seated/model/CMan0317_HD2_O01P01_STD.tga</uri>
+              <name>Custom/human_seated</name>
+            </script>
+          </material>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
@@ -38,7 +37,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/tiago_public_ws/src/Sciroc2EP1-SimulatedEnv/model_human_remove/88/model.dae</uri>
+            <uri>model://human_seated/model/model.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
