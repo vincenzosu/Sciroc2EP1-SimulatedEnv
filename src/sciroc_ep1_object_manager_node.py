@@ -245,7 +245,7 @@ def spawn_three_objs(obj0, obj1, obj2) :
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[0])   
     modlist, model1 = load_and_spawn_gazebo_models(obj1, SPAWN_POSES[1])   
     modlist, model2 = load_and_spawn_gazebo_models(obj2, SPAWN_POSES[2])   
-    objects_on_robot_tray = (model0, model1, model2)
+    objects_on_robot_tray = [model0, model1, model2]
     print (objects_on_robot_tray)
     
     
