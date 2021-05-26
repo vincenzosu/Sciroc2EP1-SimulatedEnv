@@ -38,7 +38,7 @@ OFFSET_OBJS_TRAY = 0.05
 RANDOMIZE_SPAWN = True
 CHECK_DISTANCES = False
 
-SPAWN_POSES = (
+SPAWN_POSES = (     #tuple
     Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H)),
     Pose(position=Point(x=4.5, y=-1.4, z=COUNTER_H)),
     Pose(position=Point(x=4.5, y=-1.4-OFFSET, z=COUNTER_H))
@@ -64,11 +64,11 @@ available_objects = {   #set
     "sprite",
 }
 
-objects_on_robot_tray = (  #tuple
+objects_on_robot_tray = [  #list
     "none",
     "none",
     "none"
-)
+]
 
 counter_object = "table"			
 
