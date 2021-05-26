@@ -89,7 +89,6 @@ class sciroc_ep1_object_manager:
         }
         	
 
-    
 
 
 def talker(se1om):
@@ -254,9 +253,9 @@ def change_the_item_srv(req):
     objs_on_tray = get_objects_on_robot_tray()
     available_objs = get_available_objects()
     
-    if req.name_of_the_object_to_spawn not in objs_on_tray:
-        return ChangeTheItemResponse(False, 
-        "Requested object is not on the robot's tray")    
+#    if not is_on_the_curr_ordered_objs(req.name_of_the_object_to_spawn):
+#        return ChangeTheItemResponse(False, 
+#        "Requested object is not on the counter")    
     
     if req.name_of_the_object_to_spawn not in available_objs:
         return ChangeTheItemResponse(False, 
@@ -265,7 +264,7 @@ def change_the_item_srv(req):
     old_model_id = get_model_tray_id(req.name_of_the_object_to_change)
     if old_model_id == None:
         return ChangeTheItemResponse(False, 
-        "Requestd object is not on the robot's tray")    
+        "Requestd object is not on the counter")    
 
     delete_model(old_model_id)
     position_of_old_item = objs_on_tray.index(old_model_id)
@@ -339,6 +338,14 @@ def change_object_on_robot_tray_list(old, new) :
             objects_on_robot_tray[n] = new
             return True
     return False
+
+def is_on_the_curr_ordered_objs(obj) :  
+    global objects_on_robot_tray
+    for n, curr_item_with_id in enumerate(objects_on_robot_tray):
+        if obj in curr_item_with_id: 
+            return True
+    return False
+
 
 def set_position(goal_x, goal_y, goal_z, object_to_move):
     state_msg = ModelState()
