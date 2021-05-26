@@ -346,7 +346,13 @@ def is_on_the_curr_ordered_objs(obj) :
             return True
     return False
 
-
+def get_model_tray_id(obj):
+    global objects_on_robot_tray
+    for n, curr_item_with_id in enumerate(objects_on_robot_tray):
+        if obj in curr_item_with_id: 
+            return obj
+    return None
+    
 def set_position(goal_x, goal_y, goal_z, object_to_move):
     state_msg = ModelState()
 
