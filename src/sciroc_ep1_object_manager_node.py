@@ -210,15 +210,15 @@ def get_three_ordered_items_srv(req):
     available_objs = get_available_objects()
 
     if req.item0 not in available_objs:
-        return ChangeTheItem.srvResponse(False, 
+        return GetThreeOrderedItemsResponse(False, 
         "First requested object is not valid object")        
 
     if req.item1 not in available_objs:
-        return ChangeTheItem.srvResponse(False, 
+        return GetThreeOrderedItemsResponse(False, 
         "Second requested object is not valid object")    
         
     if req.item2 not in available_objs:
-        return ChangeTheItem.srvResponse(False, 
+        return GetThreeOrderedItemsResponse(False, 
         "Third requested object is not valid object")    
     
     spawn_three_objs(req.item0, req.item1, req.item2)
@@ -255,16 +255,16 @@ def change_the_item_srv(req):
     available_objs = get_available_objects()
     
     if req.name_of_the_object_to_spawn not in objs_on_tray:
-        return ChangeTheItem.srvResponse(False, 
+        return ChangeTheItemResponse(False, 
         "Requested object is not on the robot's tray")    
     
     if req.name_of_the_object_to_spawn not in available_objs:
-        return ChangeTheItem.srvResponse(False, 
+        return ChangeTheItemResponse(False, 
         "Requested object is not valid object")    
         
     old_model_id = get_model_tray_id(req.name_of_the_object_to_change)
     if old_model_id == None:
-        return ChangeTheItem.srvResponse(False, 
+        return ChangeTheItemResponse(False, 
         "Requestd object is not on the robot's tray")    
 
     delete_model(old_model_id)
@@ -272,7 +272,7 @@ def change_the_item_srv(req):
     modlist, new_model = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[position_of_old_item])   
     
     if change_object_on_robot_tray_list(old_model_id, new_model):
-        return ChangeTheItem.srvResponse(True, "")
+        return ChangeTheItemResponse(True, "")
     return False
   
   
