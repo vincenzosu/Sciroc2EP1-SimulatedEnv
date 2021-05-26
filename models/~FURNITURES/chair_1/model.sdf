@@ -2,6 +2,17 @@
 <sdf version='1.6'>
   <model name='chair_1'>
     <link name='link_0'>
+        <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.166667</izz>
+        </inertia>
+      </inertial>
       <pose frame=''>-0.30674 -0.201817 0.000751 0 -0 0</pose>
         <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>

@@ -27,9 +27,9 @@ VERBOSE = False
 
 object_counter = 0
 
-ROBOT_TRAY_HEIGHT = 1.5             
-TABLE_CAFFE_HEIGHT = 1.1            
-COUNTER_H = 1.3                     
+ROBOT_TRAY_HEIGHT = 1.5     # height to move objects on the robot's tray                    
+TABLE_CAFFE_HEIGHT = 1.1    # height to move objects on the table            
+COUNTER_H = 1.3             # counter height        
 COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS = 1.5 # min distance to active the moving services [m]
 OFFSET = 0.3                # distance of objects from the center of the table [m]
@@ -60,7 +60,7 @@ available_objects = {   #set
     #"coke_can",
     "cocacola",    
     "plastic_cup",
-    "pringles",
+    "pringles1",
     "pringles2",
     "sprite",
 }
@@ -79,51 +79,24 @@ class sciroc_ep1_object_manager:
         #self.cw_left = np.array([None, None, None, None])
 		#				   self.ccw_right_callback, queue_size=1)   
         self.robot_pose = [0.0,0.0]		
-		
-        self.list_of_tables = {   #set
-            "cafe_table", 
-            "cafe_table_0", 
-            "cafe_table_1", 
-            "cafe_table_2", 
-            "cafe_table_5",
-            "cafe_table_6"
-        }
-        	
 
 
 
-def talker(se1om):
+def talker(se1om): #ONLY FOR TESTING PURPOSES
     if VERBOSE:
         print ("TALKER")
 
     r = rospy.Rate(10) #10hz
-
     msg = Float64()
 #    load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
 
-    #spawn_three_objs("beer", "beer", "beer", se1om)
-    #move_items_on_the_tray(se1om)
-    #move_items_on_the_closest_table(se1om)
     
-        
-    
-    
-    while not rospy.is_shutdown():
+    while not rospy.is_shutdown(): #ONLY FOR TESTING PURPOSES
         #msg = getDoorAperture()
         #ebws.door_pub.publish(msg)
         
-        #get_robot_position()
-        #get_robot_orientation()
         #load_and_spawn_gazebo_models("beer", 4.5, -2, 1.6)
         #spawn_three_objs("beer", "beer", "beer")
-        #print(get_closest_table_position_and_distance(se1om))
-        #get_robot_tray_position()
-        
-    #    print("BEER SPAWNED")
-        #msg_handle = getTrolleyPosition()
-        #ebws.door_handle_pub.publish(msg_handle)
-
-    #    spawn_three_objs("beer", "beer", "beer")
     #    move_items_on_the_tray()
     #    move_items_on_the_closest_table()
         
@@ -470,7 +443,7 @@ def listener(self):
 
 def main(args):
      se1om =  sciroc_ep1_object_manager()
-     rospy.init_node('sciroc_ep1_object_manager', anonymous=True) #CHECK IF REMOVE 'PROVIDER'
+     rospy.init_node('sciroc_ep1_object_manager', anonymous=True) 
      
      listener(se1om)
 
