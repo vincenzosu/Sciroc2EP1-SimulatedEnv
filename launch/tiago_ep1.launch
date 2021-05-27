@@ -68,4 +68,7 @@
       <node name="tuck_arm" pkg="tiago_gazebo" type="tuck_arm.py" output="screen"/>
   </group>
   <node name="image_proc" pkg="image_proc" type="image_proc" ns="xtion/rgb"/>
+
+  <node name="sciroc_ep1_object_manager_node" pkg="sciroc_ep1_object_manager" type="sciroc_ep1_object_manager_node.py" output="screen"/>
+  
 </launch>
