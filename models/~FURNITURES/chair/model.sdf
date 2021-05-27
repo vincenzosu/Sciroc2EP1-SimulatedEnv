@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='chair_1'>
+  <model name='chair'>
     <link name='link_0'>
         <inertial>
         <mass>1</mass>
