@@ -1485,10 +1485,10 @@
       <pose frame=''>3.63774 -2.51065 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>4612 378000000</sim_time>
-      <real_time>284 707957785</real_time>
-      <wall_time>1623777258 725804009</wall_time>
-      <iterations>278334</iterations>
+      <sim_time>4812 928000000</sim_time>
+      <real_time>247 788493295</real_time>
+      <wall_time>1623834096 395229235</wall_time>
+      <iterations>200550</iterations>
       <model name='CoffeeShop-EP1'>
         <pose frame=''>-0.08078 -3.40771 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -1518,33 +1518,33 @@
         </link>
       </model>
       <model name='beer_4'>
-        <pose frame=''>-2.61077 -4.78079 0.775 4e-06 -9e-06 0.006561</pose>
+        <pose frame=''>-2.61078 -4.7808 0.77499 1e-06 -2.7e-05 0.007431</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.61077 -4.7808 0.89 4e-06 -9e-06 0.006561</pose>
+          <pose frame=''>-2.61078 -4.7808 0.88999 1e-06 -2.7e-05 0.007431</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-3.40853 -2.16766 -0.452716 -0.557229 1.32606 1.43809</acceleration>
-          <wrench>-1.32933 -0.845389 -0.176559 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 -1e-06 -0 0</acceleration>
+          <wrench>0 0 -3.822 0 -0 0</wrench>
         </link>
       </model>
       <model name='beer_5'>
-        <pose frame=''>1.85772 -4.58023 0.780839 2.6e-05 0.000103 -0.000246</pose>
+        <pose frame=''>1.85772 -4.58021 0.780824 3e-06 1.3e-05 -0.000452</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>1.85773 -4.58023 0.895839 2.6e-05 0.000103 -0.000246</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.00639 -0.001478 19.5853 0.005448 0.056446 0.01493</acceleration>
-          <wrench>0.002492 -0.000577 7.63828 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='beer_6'>
-        <pose frame=''>2.1266 -4.15009 0.780825 1.7e-05 5e-06 0.002286</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>2.1266 -4.15009 0.895825 1.7e-05 5e-06 0.002286</pose>
+          <pose frame=''>1.85772 -4.58021 0.895824 3e-06 1.3e-05 -0.000452</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 -9.8 0 -0 0</acceleration>
           <wrench>0 0 -3.822 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='beer_6'>
+        <pose frame=''>2.12649 -4.15008 0.780833 -4e-06 2e-06 0.00308</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>2.12649 -4.15008 0.895833 -4e-06 2e-06 0.00308</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-1.32064 -2.27013 1.82117 0.479077 0.392004 -1.7438</acceleration>
+          <wrench>-0.515051 -0.88535 0.710258 0 -0 0</wrench>
         </link>
       </model>
       <model name='cafe_table'>
@@ -1608,23 +1608,23 @@
         </link>
       </model>
       <model name='coke_can'>
-        <pose frame=''>-2.55244 -4.88427 0.772434 -0.011194 0.004014 -0.006448</pose>
+        <pose frame=''>-2.55244 -4.88427 0.772428 -0.009223 0.003292 -0.008463</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.55244 -4.88427 0.772434 -0.011194 0.004014 -0.006448</pose>
+          <pose frame=''>-2.55244 -4.88427 0.772428 -0.009223 0.003292 -0.008463</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.057365 -0.021415 -0.002494 0.371831 0.999603 0.002052</acceleration>
-          <wrench>0.022373 -0.008352 -0.000973 0 -0 0</wrench>
+          <acceleration>0.005397 0.164654 -0.006195 -2.86674 0.093685 -0.005582</acceleration>
+          <wrench>0.002105 0.064215 -0.002416 0 -0 0</wrench>
         </link>
       </model>
       <model name='coke_can_0'>
-        <pose frame=''>2.22772 -4.60729 0.777536 0.010575 -0.035987 0.000909</pose>
+        <pose frame=''>2.22772 -4.60729 0.777536 0.01062 -0.035956 0.001504</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>2.22772 -4.60729 0.777536 0.010575 -0.035987 0.000909</pose>
+          <pose frame=''>2.22772 -4.60729 0.777536 0.01062 -0.035956 0.001504</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.061592 -0.213863 0.000962 -2.51689 1.06599 -0.187227</acceleration>
-          <wrench>0.024021 -0.083407 0.000375 0 -0 0</wrench>
+          <acceleration>0.005369 0.055083 -0.004041 -0.966472 0.097808 0.027835</acceleration>
+          <wrench>0.002094 0.021482 -0.001576 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -1638,223 +1638,233 @@
         </link>
       </model>
       <model name='ikea_harry_chair'>
-        <pose frame=''>-4.02048 -1.98445 0.00253 0 -6e-06 4e-06</pose>
+        <pose frame=''>-4.02048 -1.98445 0.002528 -4e-06 -2e-06 6e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-4.02048 -1.98445 0.00253 0 -6e-06 4e-06</pose>
+          <pose frame=''>-4.02048 -1.98445 0.002528 -4e-06 -2e-06 6e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.061325 0.013611 0.747362 -0.009562 -0.005432 -3.1412</acceleration>
-          <wrench>-0.613248 0.136113 7.47362 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 -2.36531 -0.771655 3.13845</acceleration>
+          <wrench>0 0 -98 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_0'>
-        <pose frame=''>-3.43167 -1.47887 0.002531 -0 6e-06 -1.55228</pose>
+        <pose frame=''>-3.43364 -1.47461 0.00335 0.004071 -0.000471 -1.54469</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-3.43167 -1.47887 0.002531 -0 6e-06 -1.55228</pose>
+          <pose frame=''>-3.43364 -1.47461 0.00335 0.004071 -0.000471 -1.54469</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.000145 -0.065416 3.08292 -1.51674 0.637236 -2.81089</acceleration>
-          <wrench>0.001454 -0.654159 30.8292 0 -0 0</wrench>
+          <acceleration>0.067071 0.05041 0.075382 -2.57113 0.284138 3.14159</acceleration>
+          <wrench>0.670711 0.504097 0.753824 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_1'>
-        <pose frame=''>-2.56717 -1.96647 0.002524 -8e-06 -1e-06 4e-06</pose>
+        <pose frame=''>-2.34878 -1.96647 0.002525 9e-06 -2e-06 6e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.56717 -1.96647 0.002524 -8e-06 -1e-06 4e-06</pose>
+          <pose frame=''>-2.34878 -1.96647 0.002525 9e-06 -2e-06 6e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 -9.8 0 -0 0</acceleration>
           <wrench>0 0 -98 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_10'>
-        <pose frame=''>-0.749892 -4.70495 0.00253 1.5e-05 9e-06 3e-06</pose>
+        <pose frame=''>-0.749891 -4.70495 0.002532 1.5e-05 -1.3e-05 6e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.749892 -4.70495 0.00253 1.5e-05 9e-06 3e-06</pose>
+          <pose frame=''>-0.749891 -4.70495 0.002532 1.5e-05 -1.3e-05 6e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.06205 -0.06109 0.935654 1.65175 1.2515 -3.14156</acceleration>
-          <wrench>-0.6205 -0.610903 9.35654 0 -0 0</wrench>
+          <acceleration>-0.055226 0.053118 2.46961 0 -0 0</acceleration>
+          <wrench>-0.552261 0.531177 24.696 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_11'>
-        <pose frame=''>-0.1882 -5.27403 0.002532 6e-06 6e-06 1.53195</pose>
+        <pose frame=''>-0.201705 -5.62151 0.00253 -4e-06 1.2e-05 1.53195</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.1882 -5.27403 0.002532 6e-06 6e-06 1.53195</pose>
+          <pose frame=''>-0.201705 -5.62151 0.00253 -4e-06 1.2e-05 1.53195</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 0 -0 0</acceleration>
-          <wrench>0 0 -98 0 -0 0</wrench>
+          <acceleration>0.009247 0.008534 -8.02981 -0.51595 -1.32268 -0.000137</acceleration>
+          <wrench>0.092466 0.085341 -80.2981 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_12'>
-        <pose frame=''>0.669835 -4.60555 0.002539 1e-06 -3.2e-05 -3.12817</pose>
+        <pose frame=''>0.669834 -4.60555 0.00253 7e-06 -0 -3.12817</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.669835 -4.60555 0.002539 1e-06 -3.2e-05 -3.12817</pose>
+          <pose frame=''>0.669834 -4.60555 0.00253 7e-06 -0 -3.12817</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.090049 -0.019762 7.38959 -1.80407 -0.156321 0</acceleration>
-          <wrench>-0.900495 -0.19762 73.8959 0 -0 0</wrench>
+          <acceleration>-0.012753 0.07257 3.92037 2.07968 1.35435 -3.14159</acceleration>
+          <wrench>-0.127526 0.725704 39.2037 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_13'>
-        <pose frame=''>1.58142 -4.53865 0.002522 1.8e-05 -2.7e-05 3e-06</pose>
+        <pose frame=''>1.58142 -4.53865 0.00253 1.6e-05 9e-06 5e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>1.58142 -4.53865 0.002522 1.8e-05 -2.7e-05 3e-06</pose>
+          <pose frame=''>1.58142 -4.53865 0.00253 1.6e-05 9e-06 5e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.09075 -0.095339 7.00954 -2.19352 -0 -0.000842</acceleration>
-          <wrench>-0.907495 -0.953392 70.0954 0 -0 0</wrench>
+          <acceleration>-0.061613 -0.060661 0.860323 -1.21009 0.850345 4e-06</acceleration>
+          <wrench>-0.61613 -0.60661 8.60323 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_14'>
-        <pose frame=''>2.22283 -5.18561 0.002529 -1.1e-05 -5e-06 1.54369</pose>
+        <pose frame=''>2.22283 -5.18561 0.002531 1.4e-05 -2e-05 1.54369</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>2.22283 -5.18561 0.002529 -1.1e-05 -5e-06 1.54369</pose>
+          <pose frame=''>2.22283 -5.18561 0.002531 1.4e-05 -2e-05 1.54369</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.026911 -0.028381 -4.7894 -3.10802 1.04169 3.14156</acceleration>
-          <wrench>-0.269111 -0.283811 -47.894 0 -0 0</wrench>
+          <acceleration>-0.062504 -0.059921 0.844431 -0.098904 -0.222181 -3.13775</acceleration>
+          <wrench>-0.625038 -0.59921 8.44431 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_15'>
-        <pose frame=''>2.93771 -4.47802 0.002537 1e-06 -2.5e-05 -3.13001</pose>
+        <pose frame=''>2.93771 -4.47802 0.002524 3.8e-05 2e-06 -3.13001</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>2.93771 -4.47802 0.002537 1e-06 -2.5e-05 -3.13001</pose>
+          <pose frame=''>2.93771 -4.47802 0.002524 3.8e-05 2e-06 -3.13001</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.059627 0.027388 1.32862 3.14159 0.56598 2.84092</acceleration>
-          <wrench>-0.596265 0.273876 13.2862 0 -0 0</wrench>
+          <acceleration>-0.038101 0.095694 8.5785 -0.64181 -0.4118 3.14159</acceleration>
+          <wrench>-0.38101 0.956938 85.785 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ikea_harry_chair_16'>
+        <pose frame=''>-2.94106 -1.93295 0.002627 -0.000431 -4.6e-05 3.12785</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-2.94106 -1.93295 0.002627 -0.000431 -4.6e-05 3.12785</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0.071163 -0.069073 0.090235 -2.48738 -0.271248 -3.14159</acceleration>
+          <wrench>-0.711632 -0.690727 0.902346 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_2'>
-        <pose frame=''>-1.26582 -1.52933 0.00253 1.9e-05 1e-05 -1.5477</pose>
+        <pose frame=''>-1.26582 -1.52933 0.002528 4.7e-05 2.9e-05 -1.5477</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-1.26582 -1.52933 0.00253 1.9e-05 1e-05 -1.5477</pose>
+          <pose frame=''>-1.26582 -1.52933 0.002528 4.7e-05 2.9e-05 -1.5477</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.050114 0.048627 -1.20397 0 -0 0</acceleration>
-          <wrench>-0.501144 0.486265 -12.0397 0 -0 0</wrench>
+          <acceleration>-0.111255 0.105758 9.25581 0.456191 -1.09535 3.14098</acceleration>
+          <wrench>-1.11255 1.05758 92.5581 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_3'>
-        <pose frame=''>-0.255827 -2.00344 0.002534 1e-06 -9e-06 3.09754</pose>
+        <pose frame=''>-0.255828 -2.00344 0.002532 1.2e-05 -1.1e-05 3.09754</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.255827 -2.00344 0.002534 1e-06 -9e-06 3.09754</pose>
+          <pose frame=''>-0.255828 -2.00344 0.002532 1.2e-05 -1.1e-05 3.09754</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.103705 -0.061663 9.92311 0 -0 0</acceleration>
-          <wrench>-1.03705 -0.616627 99.2311 0 -0 0</wrench>
+          <acceleration>0.03238 -0.034845 0.410124 0.208947 -1.22314 -6e-05</acceleration>
+          <wrench>0.323796 -0.348449 4.10124 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_4'>
-        <pose frame=''>0.317711 -2.00363 0.002534 5e-06 -6e-06 3e-06</pose>
+        <pose frame=''>0.317712 -2.00363 0.002533 2e-06 -4e-06 6e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.317711 -2.00363 0.002534 5e-06 -6e-06 3e-06</pose>
+          <pose frame=''>0.317712 -2.00363 0.002533 2e-06 -4e-06 6e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.10103 0.068798 9.95132 -1.418 -0.576746 -3.14105</acceleration>
-          <wrench>1.0103 0.687983 99.5132 0 -0 0</wrench>
+          <acceleration>0.102887 0.066727 10.2685 0.664799 0.98954 -3.14059</acceleration>
+          <wrench>1.02887 0.667268 102.685 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_5'>
-        <pose frame=''>0.94853 -1.60559 0.002522 1.6e-05 -2.8e-05 -1.55375</pose>
+        <pose frame=''>0.948531 -1.60559 0.002539 -1e-05 3.7e-05 -1.55375</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.94853 -1.60559 0.002522 1.6e-05 -2.8e-05 -1.55375</pose>
+          <pose frame=''>0.948531 -1.60559 0.002539 -1e-05 3.7e-05 -1.55375</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.096801 0.089014 6.993 1.65446 0.827229 -1.1e-05</acceleration>
-          <wrench>-0.968011 0.890138 69.93 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 -1.83236 -0.338908 -0.000835</acceleration>
+          <wrench>0 0 -98 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_6'>
-        <pose frame=''>1.67101 -2.07611 0.002538 -1e-06 -3e-05 3.13624</pose>
+        <pose frame=''>1.67101 -2.07611 0.002528 -8e-06 -7e-06 3.13624</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>1.67101 -2.07611 0.002538 -1e-06 -3e-05 3.13624</pose>
+          <pose frame=''>1.67101 -2.07611 0.002528 -8e-06 -7e-06 3.13624</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 0.174176 -0.25402 -0.003092</acceleration>
-          <wrench>0 0 -98 0 -0 0</wrench>
+          <acceleration>0.021155 -0.020278 -6.2777 3.14159 -1.43481 -3.14083</acceleration>
+          <wrench>0.211546 -0.202775 -62.777 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_7'>
-        <pose frame=''>-2.99621 -4.678 0.002524 -0 -8e-06 3e-06</pose>
+        <pose frame=''>-2.99621 -4.678 0.00253 9e-06 1e-06 6e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.99621 -4.678 0.002524 -0 -8e-06 3e-06</pose>
+          <pose frame=''>-2.99621 -4.678 0.00253 9e-06 1e-06 6e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 -1.08822 -1.1798 -4e-05</acceleration>
-          <wrench>0 0 -98 0 -0 0</wrench>
+          <acceleration>0.047061 -0.093057 8.09736 3.03198 -0 0.000323</acceleration>
+          <wrench>0.470606 -0.930565 80.9736 0 -0 0</wrench>
         </link>
       </model>
       <model name='ikea_harry_chair_8'>
-        <pose frame=''>-2.54379 -5.34414 0.002532 -1e-06 -0 1.59112</pose>
+        <pose frame=''>-2.53515 -5.76936 0.002537 -3e-06 -2.8e-05 1.59112</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.54379 -5.34414 0.002532 -1e-06 -0 1.59112</pose>
+          <pose frame=''>-2.53515 -5.76936 0.002537 -3e-06 -2.8e-05 1.59112</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.109226 0.039933 11.0657 -2.77858 -1.15663 0.123926</acceleration>
-          <wrench>1.09226 0.399327 110.657 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ikea_harry_chair_9'>
-        <pose frame=''>-1.27026 -4.7246 0.002532 4e-06 -4.5e-05 3.10742</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-1.27026 -4.7246 0.002532 4e-06 -4.5e-05 3.10742</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 -1.61593 -1.15264 3.13809</acceleration>
+          <acceleration>0 0 -9.8 -2.06554 0.048861 3e-06</acceleration>
           <wrench>0 0 -98 0 -0 0</wrench>
         </link>
       </model>
-      <model name='person_standing'>
-        <pose frame=''>-2.64389 -3.86267 -1e-06 -1e-06 1e-06 0.001634</pose>
+      <model name='ikea_harry_chair_9'>
+        <pose frame=''>-1.27026 -4.7246 0.002528 1.5e-05 -3.1e-05 3.10742</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.64389 -3.86267 -1e-06 -1e-06 1e-06 0.001634</pose>
+          <pose frame=''>-1.27026 -4.7246 0.002528 1.5e-05 -3.1e-05 3.10742</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>1.61746 1.14175 -1.46436 1.92804 1.44741 3.09657</acceleration>
-          <wrench>129.396 91.34 -117.149 0 -0 0</wrench>
+          <acceleration>0.063302 -0.068375 1.72794 -0.998209 1.29179 -5e-05</acceleration>
+          <wrench>0.633023 -0.683746 17.2794 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing'>
+        <pose frame=''>-2.57517 -5.42368 -1e-06 -1e-06 -1e-06 -3.09752</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-2.57517 -5.42368 -1e-06 -1e-06 -1e-06 -3.09752</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1.70222 -1.09025 -1.33971 -2.01045 1.39343 -3.08193</acceleration>
+          <wrench>136.178 -87.2201 -107.177 0 -0 0</wrench>
         </link>
       </model>
       <model name='person_standing_0'>
-        <pose frame=''>-1.68361 -4.6754 -0 -1e-06 1e-06 -1.56783</pose>
+        <pose frame=''>-1.68361 -4.67537 -0 0 -1e-06 -1.56746</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-1.68361 -4.6754 -0 -1e-06 1e-06 -1.56783</pose>
+          <pose frame=''>-1.68361 -4.67537 -0 0 -1e-06 -1.56746</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>1.13378 -1.60162 -1.53817 1.62209 1.24615 -0.044616</acceleration>
-          <wrench>90.7025 -128.13 -123.053 0 -0 0</wrench>
+          <acceleration>1.20194 1.72335 -0.979993 -1.72286 1.3115 0.033539</acceleration>
+          <wrench>96.1553 137.868 -78.3995 0 -0 0</wrench>
         </link>
       </model>
       <model name='person_standing_1'>
-        <pose frame=''>-0.383044 -3.82071 -0 1e-06 1e-06 7.4e-05</pose>
+        <pose frame=''>-0.381172 -5.30168 0 0 1e-06 -3.1406</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.383044 -3.82071 -0 1e-06 1e-06 7.4e-05</pose>
+          <pose frame=''>-0.381172 -5.30168 0 0 1e-06 -3.1406</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>1.61289 -1.13441 -1.49792 -1.93574 1.45212 -3.09673</acceleration>
-          <wrench>129.031 -90.7524 -119.834 0 -0 0</wrench>
+          <acceleration>2.17897 -1.42292 1.38376 -1.50322 0.878773 -2.99881</acceleration>
+          <wrench>174.318 -113.834 110.7 0 -0 0</wrench>
         </link>
       </model>
       <model name='person_standing_2'>
-        <pose frame=''>-2.2449 -1.94489 0 0 -1e-06 1.54788</pose>
+        <pose frame=''>-1.99273 -1.95064 -0 0 1e-06 1.54784</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-2.2449 -1.94489 0 0 -1e-06 1.54788</pose>
+          <pose frame=''>-1.99273 -1.95064 -0 0 1e-06 1.54784</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>1.52734 2.14158 1.38096 0.99213 1.34345 -2.99461</acceleration>
-          <wrench>122.187 171.327 110.477 0 -0 0</wrench>
+          <acceleration>-1.06671 1.5929 -1.72857 -1.61473 -1.17449 -0.043604</acceleration>
+          <wrench>-85.3369 127.432 -138.285 0 -0 0</wrench>
         </link>
       </model>
       <model name='person_standing_3'>
-        <pose frame=''>-0.637761 -1.99981 -0 1e-06 1e-06 -1.57126</pose>
+        <pose frame=''>-0.637767 -1.99977 -0 1e-06 1e-06 -1.57091</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-0.637761 -1.99981 -0 1e-06 1e-06 -1.57126</pose>
+          <pose frame=''>-0.637767 -1.99977 -0 1e-06 1e-06 -1.57091</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-1.14185 -1.62162 -1.44977 1.64251 -1.25523 0.045081</acceleration>
-          <wrench>-91.3478 -129.73 -115.982 0 -0 0</wrench>
+          <acceleration>-1.16113 -1.65021 -1.35054 1.63698 -1.24971 0.045901</acceleration>
+          <wrench>-92.8907 -132.017 -108.043 0 -0 0</wrench>
         </link>
       </model>
       <model name='table'>
@@ -2508,7 +2518,7 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>2.52052 -6.87423 10.0631 0 1.11566 2.01789</pose>
+        <pose frame=''>-4.98844 -8.7625 7.245 -0 0.76366 0.889885</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -3345,6 +3355,55 @@
         <kinematic>0</kinematic>
       </link>
       <pose frame=''>2.93771 -4.47802 0 0 -0 0</pose>
+    </model>
+    <model name='ikea_harry_chair_16'>
+      <link name='link'>
+        <inertial>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <pose frame=''>0 0 0 0 -0 1.6</pose>
+          <geometry>
+            <mesh>
+              <uri>model://ikea_harry_chair/meshes/mesh.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose frame=''>0 0 0 0 -0 1.6</pose>
+          <geometry>
+            <mesh>
+              <uri>model://ikea_harry_chair/meshes/mesh.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>-2.6565 -2.67386 0 0 -0 0</pose>
     </model>
   </world>
 </sdf>
