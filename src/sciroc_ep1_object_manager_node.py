@@ -36,7 +36,7 @@ OFFSET = 0.3                # distance of objects from the center of the table [
 OFFSET_TRAY = 0.11          # distance of the tray from the center of the robot [m] 
 OFFSET_OBJS_TRAY = 0.05
 RANDOMIZE_SPAWN = True
-CHECK_DISTANCES = False
+CHECK_DISTANCES = True
 
 SPAWN_POSES = (     #tuple
     Pose(position=Point(x=4.5, y=-1.4+OFFSET, z=COUNTER_H)),
@@ -206,14 +206,12 @@ def spawn_three_objs(obj0, obj1, obj2) :
     
     if RANDOMIZE_SPAWN:
         chosen = random.sample(available_objs, 1)[0]
-        print(chosen)
-        while chosen != obj0 and chosen != obj1 and chosen != obj2:
+        while chosen == obj0 or chosen == obj1 or chosen == obj2:
             chosen = random.sample(available_objs, 1)[0]
         objs = [obj0, obj1, obj2]
-        print(objs)
         random_index = random.randrange(len(objs))
         objs[random_index] = chosen
-        print(objs)
+        #print(objs)
         obj0, obj1, obj2 = objs
     
     modlist, model0 = load_and_spawn_gazebo_models(obj0, SPAWN_POSES[0])   
