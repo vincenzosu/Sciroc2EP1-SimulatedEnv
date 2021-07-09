@@ -34,7 +34,7 @@ COUNTER_POSE = np.array([4.5, -1.4, COUNTER_H])
 MIN_DIST_TO_MOVE_OBJS = 1.5 # min distance to active the moving services [m]
 OFFSET = 0.3                # distance of objects from the center of the table [m]
 OFFSET_TRAY = 0.13          # distance of the tray from the center of the robot [m] 
-OFFSET_OBJS_TRAY = 0.05
+OFFSET_OBJS_TRAY = 0.06
 RANDOMIZE_SPAWN = True
 CHECK_DISTANCES = True
 
