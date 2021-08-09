@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<gazebo version="1.2">
+  <model name="cup_glass_new">
+    <link name="link">
+      <inertial>
+        <mass>0.390</mass>
+        <inertia>
+          <ixx>0.00055575</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00055575</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001755</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <pose>0.003937 0.0047244 -0.18 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://cup_glass/meshes/cup_glass.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0.003937 0.0047244 -0.18 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://cup_glass/meshes/cup_glass.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <lighting>1</lighting>
+          <ambient>0.325 0.023 0.513 1</ambient>
+          <diffuse>0.325 0.023 0.513 1</diffuse>
+          <specular>0.01 0.01 0.01 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <shader type='vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
+        </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0.6</transparency>
+      </visual>
+    </link>
+  </model>
+</gazebo>
