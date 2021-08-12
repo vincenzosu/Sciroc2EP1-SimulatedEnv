@@ -57,12 +57,15 @@ available_objects = {   #set
     "beer",
     "bifrutas_tropical_can",
     "biscuits_pack",
-    #"coke_can",
     "cocacola",    
     "plastic_cup",
     "pringles1",
     "pringles2",
     "sprite",
+    "estathe",
+    "peroni",
+    "tea_box",
+    "fanta"
 }
 
 objects_on_robot_tray = [  #list
