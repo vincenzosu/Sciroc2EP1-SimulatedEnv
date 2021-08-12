@@ -31,7 +31,7 @@
       </visual>
       <collision name='collision'>
         <laser_retro>0</laser_retro>
-        <max_contacts>60</max_contacts>
+        <max_contacts>1</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
@@ -82,7 +82,7 @@
       </visual>
       <collision name='collision'>
         <laser_retro>0</laser_retro>
-        <max_contacts>60</max_contacts>
+        <max_contacts>1</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
