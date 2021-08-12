@@ -1,0 +1,14 @@
+material peroni
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture peroni.jpg
+ 	scale 1 1 1
+      }
+    }
+  }
+}
