@@ -50,7 +50,7 @@
             <ode>
               <kp>10000000.0</kp>
               <kd>1.0</kd>
-              <min_depth>0.00001</min_depth>
+              <min_depth>0.0000001</min_depth>
               <max_vel>0.1</max_vel>
             </ode>
           </contact>
@@ -101,7 +101,7 @@
             <ode>
               <kp>10000000.0</kp>
               <kd>1.0</kd>
-              <min_depth>0.00001</min_depth>
+              <min_depth>0.0000001</min_depth>
               <max_vel>0.1</max_vel>
             </ode>
           </contact>
