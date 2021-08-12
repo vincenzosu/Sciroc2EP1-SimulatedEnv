@@ -25,7 +25,7 @@
        <script>
             <uri>model://estathe/materials/scripts</uri>
             <uri>model://estathe/materials/textures</uri>
-            <name>fanta</name>
+            <name>estathe</name>
           </script>
         </material>
       </visual>
