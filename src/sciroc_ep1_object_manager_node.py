@@ -338,7 +338,7 @@ def set_position(goal_x, goal_y, goal_z, object_to_move):
     state_msg.pose.position.x = goal_x
     state_msg.pose.position.y = goal_y
     state_msg.pose.position.z = goal_z
-    state_msg.pose.orientation.x = 0
+    state_msg.pose.orientation.x = 1
     state_msg.pose.orientation.y = 0
     state_msg.pose.orientation.z = 0
     state_msg.pose.orientation.w = 0
