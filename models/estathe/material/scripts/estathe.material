@@ -1,0 +1,14 @@
+material Custom/estathe
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture estathe.jpg
+			}
+		}
+	}
+}
+

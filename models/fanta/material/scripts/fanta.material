@@ -1,0 +1,14 @@
+material Custom/fanta
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture fanta.jpg
+			}
+		}
+	}
+}
+
