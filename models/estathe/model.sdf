@@ -110,8 +110,8 @@
     </link>
      <!-- Joint -->
   <joint name="joint_00" type="revolute">
-    <parent link="${namespace}/link_0"/>
-    <child link="${namespace}/link_1"/>
+    <parent link="estathe::link_0"/>
+    <child link="estathe::link_1"/>
     <origin xyz="0.0 0.0 0.0" rpy="0.0 ${-pi/2} 0.0"/> 
     <axis xyz="0.0 1.0 0.0"/> 
      <!-- <limit lower="-3.141526/2" upper="0"/>
