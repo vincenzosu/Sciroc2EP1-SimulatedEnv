@@ -84,12 +84,12 @@
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
+       <!--   <geometry>
           <mesh>
             <uri>model://estathe/meshes/metal.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
-        </geometry>
+        </geometry>-->
        <!--  <surface>
           <friction>
             <ode>
