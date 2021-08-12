@@ -51,25 +51,7 @@
     <link name='link_1'>
         <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
-        <geometry>
-          <mesh>
-            <uri>model://estathe/meshes/metal.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-        <material>
-          <lighting>1</lighting>
-          <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            <name>Gazebo/Grey</name>
-          </script>
-              <ambient>0.666 0.666 0.666 1</ambient>
-          <diffuse>0.666 0.666 0.666 1</diffuse>
-          <specular>0.01 0.01 0.01 1</specular>
-          <emissive>0 0 0 1</emissive>
-        </material>
-        <cast_shadows>1</cast_shadows>
-        <transparency>0</transparency>
+        
       </visual>
       
     </link>
