@@ -109,7 +109,7 @@
       </collision>
     </link>
      <!-- Joint -->
-  <joint name="joint_00" type="fixed">
+  <joint name="joint_00" type="revolute">
     <parent link="${namespace}/link_0"/>
     <child link="${namespace}/link_1"/>
     <origin xyz="0.0 0.0 0.0" rpy="0.0 ${-pi/2} 0.0"/> 
