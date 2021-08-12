@@ -48,13 +48,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1'>
-        <visual name='visual'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        
-      </visual>
-      
-    </link>
+    
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
   </model>
